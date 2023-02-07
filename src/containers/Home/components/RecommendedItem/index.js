@@ -15,7 +15,7 @@ export default class RecommendedItem extends Component {
       saleDesc
     } = this.props.data;
     return (
-      <Link to={`/detail/${id}`} className="RecommendedItem">
+      <Link to={`/productdetails/${id}`} className="RecommendedItem">
         <div className="recommendedItem__picContainer">
           <div className="recommendedItem__picTag">{tag}</div>
           <img className="recommendedItem__pic" src={picture} alt={shop} />

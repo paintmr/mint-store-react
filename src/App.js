@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import Home from './containers/Home'
 import "./App.css"
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import ErrorToast from './components/ErrorToast'
 import { connect } from 'react-redux'
 import { errorSelector, clearError } from './redux/modules/app'
+import ProductDetails from './containers/ProductDetails'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route to="/" component={Home} />
-        </Switch>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/productdetails/:id" component={ProductDetails} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </BrowserRouter>
+
         {this.props.error ? <ErrorToast error={this.props.error} clearError={this.props.clearError} /> : null}
       </div>
     )

@@ -15,7 +15,7 @@ export default class Discount extends Component {
         <div className="discount__content">
           {this.props.discountProducts.map((item, index) => {
             return (
-              <Link to={`/detail/${item.id}`} key={item.id} className="discount__item">
+              <Link to={`/productdetails/${item.id}`} key={item.id} className="discount__item">
                 <div className="discount__itemPic">
                   <img width="100%" height="100%" src={item.picture} alt={item.shop} />
                 </div>
