@@ -1,0 +1,57 @@
+[
+  {
+    "id": "p-1",
+    "shopId": "s-1",
+    "shop": "YD Creative Cuisine",
+    "tag": "STAR",
+    "picture": "https://p0.meituan.net/deal/e6864ed9ce87966af11d922d5ef7350532676.jpg.webp@180w_180h_1e_1c_1l_80q|watermark=0",
+    "product": "Passion Fruit Juice",
+    "currentPrice": 19.9,
+    "oldPrice": 48,
+    "saleDesc": "Sold 6034"
+  },
+  {
+    "id": "p-2",
+    "shopId": "s-2",
+    "shop": "Zheng Yi Wei",
+    "tag": "STAR",
+    "picture": "https://p0.meituan.net/deal/4d32b2d9704fda15aeb5b4dc1d4852e2328759.jpg%40180w_180h_1e_1c_1l_80q%7Cwatermark%3D0",
+    "product": "Beef Bibimbap + Egg Custard",
+    "currentPrice": 29,
+    "oldPrice": 41,
+    "saleDesc": "Sold 15500"
+  },
+  {
+    "id": "p-3",
+    "shopId": "s-3",
+    "shop": "Salud Dairy",
+    "tag": "STAR",
+    "picture": "https://p0.meituan.net/deal/b7935e03809c771e42dfa20784ca6e5228827.jpg.webp@180w_180h_1e_1c_1l_80q|watermark=0",
+    "product": "Frozen Yogurt",
+    "currentPrice": 20,
+    "oldPrice": 25,
+    "saleDesc": "Sold 88719"
+  },
+  {
+    "id": "p-4",
+    "shopId": "s-4",
+    "shop": "Yoshinoya",
+    "tag": "STAR",
+    "picture": "https://p0.meituan.net/deal/63a28065fa6f3a7e88271d474e1a721d32912.jpg%40180w_180h_1e_1c_1l_80q%7Cwatermark%3D0",
+    "product": "Braised Fish + cola",
+    "currentPrice": 14,
+    "oldPrice": 23.5,
+    "saleDesc": "Sold 53548"
+  },
+  {
+    "id": "p-5",
+    "shopId": "s-5",
+    "shop": "Noodle Wang",
+    "tag": "STAR",
+    "picture": "https://p1.meituan.net/deal/a5d9800b5879d596100bfa40ca631396114262.jpg.webp@180w_180h_1e_1c_1l_80q|watermark=0",
+    "product": "Chicken Noodles",
+    "currentPrice": 17.5,
+    "oldPrice": 20,
+    "saleDesc": "Sold 23976"
+  }
+]

@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Home from './containers/Home'
+import "./App.css"
+import { Switch, Route } from 'react-router-dom'
+import ErrorToast from './components/ErrorToast'
+import { connect } from 'react-redux'
+import { errorSelector, clearError } from './redux/modules/app'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route to="/" component={Home} />
+        </Switch>
+        {this.props.error ? <ErrorToast error={this.props.error} clearError={this.props.clearError} /> : null}
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    error: errorSelector(state),
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    clearError: () => { dispatch(clearError()) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
