@@ -30,7 +30,7 @@ The module file consists of two types of files: the `files to store different ty
 
 Take redux/modules/home.js and redux/modules/entities/products.js for example.
 
-The home.js file contains all the actions, reducers, and selectors for the HomePage. Once the HomePage is mounted, home.js dispatches request actions to fetch product list data. The actions are processed by reducers in both home.js and products.js. The state in home.js keeps product id arrays for differences sections of the HomePage, while the state in products.js keeps all product data. Then the selectors in home.js get all product data from products.js based on the id arrays home.js keeps.
+The home.js file contains all the actions, reducers, and selectors for the HomePage. Once the HomePage is mounted, home.js dispatches request actions to fetch product list data. The actions are processed by reducers in both home.js and products.js. The state in home.js keeps product id arrays for different sections of the HomePage, while the state in products.js keeps all product data. Then the selectors in home.js get all product data from products.js based on the id arrays home.js keeps.
 
 ### Middleware
 

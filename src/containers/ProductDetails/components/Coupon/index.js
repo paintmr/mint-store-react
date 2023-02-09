@@ -3,6 +3,7 @@ import "./style.css";
 
 export default class Coupon extends Component {
   render() {
+    const { validityPeriod, purchaseNotes } = this.props.productDetails
     return (
       <div className="coupon">
         <div className="coupon__header">
@@ -12,26 +13,17 @@ export default class Coupon extends Component {
         <div className="coupon__list">
           <dl className="coupon__item">
             <dt className="coupon__itemTitle">Validity Period</dt>
-            <dd className="coupon__itemDesc">January 1 to September 29</dd>
+            <dd className="coupon__itemDesc">{validityPeriod}</dd>
           </dl>
-          <dl className="coupon__item">
-            <dt className="coupon__itemTitle">Exceptions</dt>
-            <dd className="coupon__itemDesc">The last Sunday of each month</dd>
-          </dl>
-          <dl className="coupon__item">
-            <dt className="coupon__itemTitle">Time</dt>
-            <dd className="coupon__itemDesc">Coupon Time: 11:00-22:00</dd>
-          </dl>
-          <dl className="coupon__item">
-            <dt className="coupon__itemTitle">Booking</dt>
-            <dd className="coupon__itemDesc">
-              No need booking
-            </dd>
-          </dl>
-          <dl className="coupon__item">
-            <dt className="coupon__itemTitle">Suggestion</dt>
-            <dd className="coupon__itemDesc">2 people / coupon</dd>
-          </dl>
+          {purchaseNotes.map((item, index) => {
+            return (
+              <dl key={index} className="coupon__item">
+                <dt className="coupon__itemTitle">{item.title}</dt>
+                <dd className="coupon__itemDesc">{item.content}</dd>
+              </dl>
+            )
+          })}
+
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import url from "../../utils/url"
-import { entityProducts } from "./entities/projucts"
+import { entityProducts } from "./entities/products"
 import { combineReducers } from "redux"
+import { getProductByIdSelector } from "./entities/products"
 
 // initial state for Home
 const initialState = {
@@ -26,7 +27,7 @@ export const types = {
   FETCH_RECOMMENDED_FAILURE: "HOME/FETCH_RECOMMENDED_FAILURE"
 }
 
-// action creators for reudx/middleware/dataFetching.js
+// action group creators  These actions are processed by reudx/middleware/dataFetching.js
 const fetchDiscounts = (url) => {
   return {
     FETCH_DATA: {
@@ -56,7 +57,7 @@ const fetchRecommended = (url) => {
 }
 
 
-// actions   Data-fetching actions are processed by redux/middleware/dataFetching
+// action creators   Data-fetching actions are processed by redux/middleware/dataFetching
 export const discountsReqest = () => {
   return (dispatch, getState) => {
     // If data have been fetched, there is no need to dispatch any action.
@@ -142,13 +143,13 @@ export default homeReducer
 // The ids of products are stored in redux/modules/home.js, while the product object is stored in redux/modules/entities/products.js
 export const discountsSelector = state => {
   return state.home.discounts.ids.map(id => {
-    return state.entities.products[id]
+    return getProductByIdSelector(state, id)
   })
 }
 
 export const recommendedSelector = state => {
   return state.home.recommended.ids.map(id => {
-    return state.entities.products[id]
+    return getProductByIdSelector(state, id)
   })
 }
 

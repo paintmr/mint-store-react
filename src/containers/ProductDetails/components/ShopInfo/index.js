@@ -3,30 +3,32 @@ import './style.css'
 
 export default class ShopInfo extends Component {
   render() {
+    const { shop: { shop, star, phone, address }, shopNum } = this.props
+
     return (
       <div className="shopInfo">
         <div className="shopInfo__header">
-          Related restaurants (4)
+          Related restaurants ({shopNum})
           <span className="shopInfo__arrow"></span>
         </div>
         <div className="shopInfo__middle">
           <div className="shopInfo__middleLeft">
             <div className="shopInfo__shopName">
-              YD Creative Cuisine
+              {shop}
             </div>
             <div className="shopInfo__starsWrapper">
               <span className="shopInfo__stars">
-                <i className="shopInfo__stars--red" style={{ "width": "100%" }}></i>
+                <i className="shopInfo__stars--red" style={{ "width": `${star * 20}%` }}></i>
               </span>
               <span className="shopInfo__distance">>100km</span>
             </div>
           </div>
-          <div className="shopInfo__middleRight">
+          <a className="shopInfo__middleRight" href={`tel://${phone}`}>
             <i className="shopInfo__phoneIcon"></i>
-          </div>
+          </a>
         </div>
         <div className="shopInfo__bottom">
-          <i className="shopInfo__locationIcon"></i>Tsuen Wan, HK
+          <i className="shopInfo__locationIcon"></i>{address}
         </div>
       </div>
     );

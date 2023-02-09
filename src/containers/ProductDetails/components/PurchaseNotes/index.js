@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
 import "./style.css"
 
-class Detail extends Component {
+export default class PurchaseNotes extends Component {
   render() {
+    const { detail: { category, products, remark }, currentPrice, oldPrice } = this.props.productDetails
     return (
-      <div className="purchasedetails">
+      <div className="purchase__notes">
         <div className="detail__header">
-          <span>Purchase Details</span>
+          <span>Purchase Notes</span>
           <i className="detail__headerIcon"></i>
         </div>
         <table cellPadding="0" cellSpacing="0" className="detail__table">
           <tbody>
             <tr className="detail__row">
               <th colSpan="3" className="detail__category">
-                Drinks
+                {category}
               </th>
             </tr>
-            <tr className="detail__row">
-              <td>Passion Fruit Juice (Cold Drinks)</td>
-              <td className="detail__td--alignRight">
-                1 Bottle
-              </td>
-              <td className="detail__td--alignRight">
-                $48
-              </td>
-            </tr>
+
+            {products.map((rowInfo, index) => {
+              return (
+                <tr key={index} className="detail__row">
+                  <td>{rowInfo.name}</td>
+                  <td className="detail__td--alignRight">
+                    {rowInfo.quantity}
+                  </td>
+                  <td className="detail__td--alignRight">
+                    {rowInfo.price}
+                  </td>
+                </tr>
+              )
+            })}
+
             <tr className="detail__row">
               <td />
               <td className="detail__td--price">
@@ -35,17 +42,17 @@ class Detail extends Component {
                 </strong>
               </td>
               <td className="detail__td--price">
-                $48
+                ${oldPrice}
                 <br />
                 <strong className="detail__td--priceNew">
-                  $19.9
+                  ${currentPrice}
                 </strong>
               </td>
             </tr>
           </tbody>
         </table>
         <div className="detail__remark">
-          Free wifi
+          {remark}
         </div>
         <div className="detail__more">
           <span>More details</span>
@@ -56,5 +63,3 @@ class Detail extends Component {
     );
   }
 }
-
-export default Detail;

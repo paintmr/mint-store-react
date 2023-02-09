@@ -9,6 +9,7 @@ import Discount from './components/Discount'
 import RecommendedList from './components/RecommendList'
 import Footer from '../../components/Footer'
 import { connect } from 'react-redux'
+
 // action creators and selectors
 import { discountsSelector, recommendedSelector, rmdPageCountSelector, rmdIsFetchingSelector, discountsReqest, recommendedRequest } from '../../redux/modules/home'
 

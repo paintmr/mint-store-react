@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import productReducer from './projucts'
+import productReducer from './products'
+import shopReducer from "./shops";
 
 const entityReducer = combineReducers({
-  products: productReducer
+  products: productReducer,
+  shops: shopReducer
 })
 
 export default entityReducer

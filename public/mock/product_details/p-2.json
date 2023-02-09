@@ -1,0 +1,59 @@
+{
+  "id": "p-1",
+  "shopIds": [
+    "s-10",
+    "s-11",
+    "s-12"
+  ],
+  "nearestShop": "s-10",
+  "shop": "Zheng Yi Wei",
+  "tag": "STAR",
+  "picture": "https://p0.meituan.net/deal/4d32b2d9704fda15aeb5b4dc1d4852e2328759.jpg@450w_280h_1e_1c_1l|watermark=1&&r=1&p=9&x=2&y=2&relative=1&o=20",
+  "product": "Passion Fruit Juice",
+  "description": "Just $19.9 for Delicious Passion Fruit Juice!",
+  "currentPrice": 19.9,
+  "oldPrice": 48,
+  "saleDesc": "Sold 6034",
+  "detail": {
+    "category": "Drinks",
+    "products": [
+      {
+        "name": "Passion Fruit Juice (Cold Drinks)",
+        "quantity": "1 bottle",
+        "price": "$48"
+      }
+    ],
+    "remark": "Free Wifi"
+  },
+  "validityPeriod": "January 1 to September 29",
+  "purchaseNotes": [
+    {
+      "title": "Exceptions",
+      "content": "The last Sunday of each month"
+    },
+    {
+      "title": "Time",
+      "content": "Coupon Time: 11:00-22:00"
+    },
+    {
+      "title": "Booking",
+      "content": "No need booking"
+    },
+    {
+      "title": "Suggestion",
+      "content": "2 people / coupon"
+    },
+    {
+      "title": "VIP rooms",
+      "content": "Available"
+    },
+    {
+      "title": "Takeaway",
+      "content": "Available"
+    },
+    {
+      "title": "Services",
+      "content": "Free WiFi"
+    }
+  ]
+}
