@@ -23,5 +23,6 @@ export default class PopularSearch extends Component {
   addKeyword = (item) => {
     this.props.addKeywordToHistory(item.keyword)
     // go to Search Results Page
+    this.props.history.push('/searchresults', { keyword: item.keyword })
   }
 }

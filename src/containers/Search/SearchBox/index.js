@@ -73,6 +73,7 @@ export default class SearchBox extends Component {
     this.props.addKeywordToHistory(item.keyword)
     this.props.clearInputText()
     // go to Search Results Page
+    this.props.history.push('/searchresults', { keyword: item.keyword })
   }
 
 }
