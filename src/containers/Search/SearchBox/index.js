@@ -35,20 +35,21 @@ export default class SearchBox extends Component {
   }
 
   render() {
+    const { inputText } = this.props
     return (
       <div className="searchBox">
         <div className="searchBox__container">
-          <input className="searchBox__text" placeholder='Enter a shop / place' value={this.state.inputText} onChange={this.handleChange} />
-          <span className="searchBox__clear" onClick={this.handleClear}></span>
-          <span className="searchBox__cancel" onClick={this.handleCancel}>Cancel</span>
+          <input className="searchBox__text" placeholder='Enter a shop / place' value={inputText} onChange={this.handleChange} />
+          <span className="searchBox__clear" onClick={this.props.clearInputText}></span>
+          <span className="searchBox__cancel" onClick={this.props.goBack}>Cancel</span>
         </div>
-        {this.state.inputText ? this.renderSuggestList() : null}
+        {inputText ? this.renderSuggestList() : null}
       </div>
     );
   }
 
   handleChange = (e) => {
-    this.setState({ inputText: e.target.value })
+    this.props.setInputText(e.target.value)
   }
 
   renderSuggestList = () => {
@@ -57,7 +58,7 @@ export default class SearchBox extends Component {
         {
           suggestList.map(item => {
             return (
-              <li className="searchBox__item" key={item.id}>
+              <li className="searchBox__item" key={item.id} onClick={this.addKeyword.bind(this, item)}>
                 <span className="searchBox__itemKeyworkd">{item.keyword}</span>
                 <span className="searchBox__itemQuantity">About {item.quantity} results</span>
               </li>
@@ -68,8 +69,10 @@ export default class SearchBox extends Component {
     )
   }
 
-  handleClear = () => {
-    this.setState({ inputText: '' })
+  addKeyword = (item) => {
+    this.props.addKeywordToHistory(item.keyword)
+    this.props.clearInputText()
+    // go to Search Results Page
   }
 
 }
