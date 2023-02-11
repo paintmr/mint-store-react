@@ -8,6 +8,7 @@ import { errorSelector, clearError } from './redux/modules/app'
 import ProductDetails from './containers/ProductDetails'
 import Search from './containers/Search'
 import SearchResults from './containers/SearchResults'
+import Login from './containers/Login'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path="/productdetails/:id" component={ProductDetails} />
             <Route path="/search" component={Search} />
             <Route path="/searchresults" component={SearchResults} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
           </Switch>
         </BrowserRouter>

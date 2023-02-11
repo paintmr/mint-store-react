@@ -2,21 +2,31 @@
 
 ## React Version
 
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-redux": "5.0.7",
-    "react-router-dom": "4.3.1",
-    "react-scripts": "1.1.4",
-    "react-slick": "^0.29.0",
-    "redux": "4.0.0",
-    "redux-thunk": "2.3.0",
-    "web-vitals": "^2.1.0"
+"react": "16.14.0",
+
+"react-dom": "16.14.0",
+
+"react-redux": "5.0.7",
+
+"react-router-dom": "4.3.1",
+
+"react-scripts": "1.1.4",
+
+"react-slick": "^0.29.0",
+
+"redux": "4.0.0",
+
+"redux-thunk": "2.3.0",
+
+"web-vitals": "^2.1.0"
 
 ## App Structure
 
 The app ui part consists of the following pages:
 
-- Home
+- Home 👉 ProductDetails
+- Search 👉 SearchRedults
+- Login 👉 UserCentre 👉 Purchase
 
 ## Redux
 
