@@ -75,9 +75,9 @@ export default class ShopList extends Component {
     return (
       <div className="shopList">
         <div className="shopList__filter">
-          <span className="shopList__filterItem">全部商区</span>
-          <span className="shopList__filterItem">全部分类</span>
-          <span className="shopList__filterItem">智能排序</span>
+          <span className="shopList__filterItem">All Shops</span>
+          <span className="shopList__filterItem">All Categories</span>
+          <span className="shopList__filterItem">Auto sorting</span>
         </div>
         <div className="shopList__list">
           {dataSource.map((item, index) => {

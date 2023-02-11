@@ -12,6 +12,7 @@
 
 .searchHeader__back {
   position: relative;
+  cursor: pointer;
 }
 
 .searchHeader__back::before {
@@ -79,6 +80,7 @@
   top: 1px;
   right: 8px;
   position: absolute;
+  cursor: pointer;
 }
 
 .searchHeader__icon::after {

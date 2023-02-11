@@ -1,34 +1,6 @@
 import React, { Component } from 'react'
 import './style.css'
 
-const suggestList = [
-  {
-    id: 1,
-    keyword: "hotpot ",
-    quantity: 8710
-  },
-  {
-    id: 2,
-    keyword: "hotpot HK",
-    quantity: 541
-  },
-  {
-    id: 3,
-    keyword: "hotpot Kwai Tsing",
-    quantity: 65
-  },
-  {
-    id: 4,
-    keyword: "hotpot Kwun Tong",
-    quantity: 133
-  },
-  {
-    id: 5,
-    keyword: "hotpot Sichuan",
-    quantity: 179
-  }
-];
-
 export default class SearchBox extends Component {
   state = {
     inputText: ''
@@ -49,21 +21,30 @@ export default class SearchBox extends Component {
   }
 
   handleChange = (e) => {
-    this.props.setInputText(e.target.value)
+    const inputText = e.target.value.trim()
+    if (inputText) {
+      this.props.setInputText(e.target.value)
+      this.props.relatedKeywordsRequest(e.target.value)
+    } else {
+      // this.props.clearInputText() here is a must. Otherwise, when the user has deleted the last character in the input, inputText in line 24 receives an empty string. Then lines 26 and 27 won't be executed. Then setInputText() won't be able to set state.search.inputText to an empty string. Then the last character will always be in the input area, making the user feel that she is unable to delete that character forever.
+      this.props.clearInputText()
+    }
   }
 
   renderSuggestList = () => {
+    const { relatedKeywords } = this.props
     return (
       <ul className="searchBox__list">
         {
-          suggestList.map(item => {
-            return (
-              <li className="searchBox__item" key={item.id} onClick={this.addKeyword.bind(this, item)}>
-                <span className="searchBox__itemKeyworkd">{item.keyword}</span>
-                <span className="searchBox__itemQuantity">About {item.quantity} results</span>
-              </li>
-            )
-          })
+          relatedKeywords ?
+            relatedKeywords.map(item => {
+              return (
+                <li className="searchBox__item" key={item.id} onClick={this.addKeyword.bind(this, item)}>
+                  <span className="searchBox__itemKeyworkd">{item.keyword}</span>
+                  <span className="searchBox__itemQuantity">About {item.quantity} results</span>
+                </li>
+              )
+            }) : null
         }
       </ul>
     )

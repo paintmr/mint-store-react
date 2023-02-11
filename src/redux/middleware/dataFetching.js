@@ -33,19 +33,28 @@ export default store => next => action => {
   // Get the three action types from the array types and name them
   const [requestType, successType, failureType] = types
 
+  // change action: delete action['FETCH_DATA'], while keep the rest data of action
+  const newAction = (typeAndData) => {
+    delete action['FETCH_DATA']
+    return {
+      ...typeAndData,
+      ...action
+    }
+  }
+
   // Using next() to dispatch requestType
-  next({ type: requestType })
+  next(newAction({ type: requestType }))
 
   // Fetch data
   return fetchData(url, entityInfo).then(
     (data) => {
-      next({ type: successType, fetchedData: data })
+      next(newAction({ type: successType, fetchedData: data }))
     },
     (error) => {
-      next({
+      next(newAction({
         type: failureType,
         error: error.message || '获取数据失败'
-      })
+      }))
     }
   )
 }

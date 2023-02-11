@@ -5,7 +5,7 @@ import SearchHistory from './SearchHistory'
 
 import { connect } from 'react-redux'
 // import selectors, actions 
-import { inputTextSelector, popularKeywordsSelector, historyKeywordsSelector, setInputText, clearInputText, popularKeywordsRequest, clearSearchHistory, addKeywordToHistory } from '../../redux/modules/search'
+import { inputTextSelector, popularKeywordsSelector, historyKeywordsSelector, relatedKeywordsSelector, setInputText, clearInputText, popularKeywordsRequest, clearSearchHistory, addKeywordToHistory, relatedKeywordsRequest } from '../../redux/modules/search'
 
 class Search extends Component {
   componentDidMount() {
@@ -13,10 +13,10 @@ class Search extends Component {
   }
 
   render() {
-    const { inputText, setInputText, clearInputText, popularKeywords, historyKeywords, clearSearchHistory, addKeywordToHistory, history } = this.props
+    const { inputText, setInputText, clearInputText, relatedKeywords, popularKeywords, historyKeywords, clearSearchHistory, addKeywordToHistory, history, relatedKeywordsRequest } = this.props
     return (
       <div>
-        <SearchBox inputText={inputText} setInputText={setInputText} clearInputText={clearInputText} goBack={this.goBack} addKeywordToHistory={addKeywordToHistory} history={history} />
+        <SearchBox inputText={inputText} setInputText={setInputText} clearInputText={clearInputText} goBack={this.goBack} relatedKeywords={relatedKeywords} addKeywordToHistory={addKeywordToHistory} history={history} relatedKeywordsRequest={relatedKeywordsRequest} />
         <PopularSearch popularKeywords={popularKeywords} addKeywordToHistory={addKeywordToHistory} history={history} />
         <SearchHistory historyKeywords={historyKeywords} clearSearchHistory={clearSearchHistory} />
       </div>
@@ -32,7 +32,8 @@ const mapStateToProps = state => {
   return {
     inputText: inputTextSelector(state),
     popularKeywords: popularKeywordsSelector(state),
-    historyKeywords: historyKeywordsSelector(state)
+    historyKeywords: historyKeywordsSelector(state),
+    relatedKeywords: relatedKeywordsSelector(state)
   }
 }
 
@@ -42,7 +43,8 @@ const mapDispatchToProps = dispatch => {
     clearInputText: (inputText) => { dispatch(clearInputText(inputText)) },
     popularKeywordsRequest: () => { dispatch(popularKeywordsRequest()) },
     clearSearchHistory: () => { dispatch(clearSearchHistory()) },
-    addKeywordToHistory: (keyword) => { dispatch(addKeywordToHistory(keyword)) }
+    addKeywordToHistory: (keyword) => { dispatch(addKeywordToHistory(keyword)) },
+    relatedKeywordsRequest: (keyword) => { dispatch(relatedKeywordsRequest(keyword)) },
   }
 }
 

@@ -8,7 +8,7 @@ export default class SearchResults extends Component {
   render() {
     return (
       <div>
-        <SearchHeader />
+        <SearchHeader history={this.props.history} />
         <SearchBox keyword={this.props.location.state.keyword} />
         <Banner />
         <ShopList />
