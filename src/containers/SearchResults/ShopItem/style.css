@@ -92,7 +92,7 @@
 }
 
 .shopItem__price::before {
-  content: "\A5";
+  content: "$";
   font-size: 12px;
   line-height: 12px;
   margin-right: 2px;

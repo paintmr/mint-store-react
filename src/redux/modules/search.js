@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
-import { entityKeywords } from "./entities/keywords"
+import { entityKeywords, getKeywordById } from "./entities/keywords"
 import url from "../../utils/url"
-import { getKeywordById } from "./entities/keywords"
+import { entityShops, getShopByIdSelector } from "./entities/shops"
 
 const initialstate = {
   inputText: '',
@@ -15,7 +15,13 @@ const initialstate = {
     //   ids:[]
     // }
   },
-  historyKeywords: ['tea', 'nuts']
+  historyKeywords: ['tea', 'coffee'],
+  shopsByKeyword: {
+    // hotpot: {
+    //   isFetching: true,
+    //   ids:[]
+    // }
+  }
 }
 
 // action types
@@ -32,7 +38,11 @@ const types = {
   CLEAR_INPUT_TEXT: "CLEAR_INPUT_TEXT",
 
   ADD_HISTORY_KEYWORD: "ADD_HISTORY_KEYWORD",
-  CLEAR_HISTORY_KEYWORD: "CLEAR_HISTORY_KEYWORD"
+  CLEAR_HISTORY_KEYWORD: "CLEAR_HISTORY_KEYWORD",
+
+  FETCH_SHOPSBYKEYWORD_REQUEST: "FETCH_SHOPSBYKEYWORD_REQUEST",
+  FETCH_SHOPSBYKEYWORD_SUCCESS: "FETCH_SHOPSBYKEYWORD_SUCCESS",
+  FETCH_SHOPSBYKEYWORD_FAILURE: "FETCH_SHOPSBYKEYWORD_FAILURE",
 }
 
 // action group creators (acctions processed by redux/middleware/dataFetching.js）
@@ -65,40 +75,62 @@ const fetchRelatedKeywords = (url, keyword) => {
   }
 }
 
-// action creators
-export const setInputText = (inputText) => {
-  return (dispatch, getState) => {
-    dispatch({ type: types.SET_INPUT_TEXT, inputText })
+const fetchShopsByKeyword = (url, keyword) => {
+  return {
+    FETCH_DATA: {
+      types: [
+        types.FETCH_SHOPSBYKEYWORD_REQUEST,
+        types.FETCH_SHOPSBYKEYWORD_SUCCESS,
+        types.FETCH_SHOPSBYKEYWORD_FAILURE
+      ],
+      url,
+      entityInfo: entityShops
+    },
+    keyword
   }
 }
 
+// action creators
+export const setInputText = (inputText) => {
+  return { type: types.SET_INPUT_TEXT, inputText }
+}
+
 export const clearInputText = (inputText) => {
-  return (dispatch, getState) => {
-    dispatch({ type: types.CLEAR_INPUT_TEXT })
-  }
+  return { type: types.CLEAR_INPUT_TEXT }
 }
 
 export const popularKeywordsRequest = () => {
   return (dispatch, getState) => {
-    dispatch(fetchPopularKeywords(url.getPopularKeywords()))
+    const { ids } = getState().search.popularKeywords
+    if (ids.length > 0) {
+      return null
+    } else {
+      dispatch(fetchPopularKeywords(url.getPopularKeywords()))
+    }
   }
 }
 
 export const relatedKeywordsRequest = (keyword) => {
   return (dispatch, getState) => {
+    const { relatedKeywords } = getState().search
+    if (relatedKeywords[keyword]) {
+      return null
+    }
     dispatch(fetchRelatedKeywords(url.getRelatedKeywords(keyword), keyword))
   }
 }
 
 export const clearSearchHistory = () => {
-  return (dispatch, getState) => {
-    dispatch({ type: types.CLEAR_HISTORY_KEYWORD })
-  }
+  return { type: types.CLEAR_HISTORY_KEYWORD }
 }
 
 export const addKeywordToHistory = (keyword) => {
+  return { type: types.ADD_HISTORY_KEYWORD, keyword }
+}
+
+export const shopsByKeywordRequest = (keyword) => {
   return (dispatch, getState) => {
-    dispatch({ type: types.ADD_HISTORY_KEYWORD, keyword })
+    dispatch(fetchShopsByKeyword(url.getShopsByKeyword(keyword), keyword))
   }
 }
 
@@ -153,23 +185,23 @@ const relatedKeywordReducer = (state = initialstate.relatedKeywords, action) => 
   }
 }
 
-const keywordAndState = (state, action) => {
+const keywordAndState = (state = { isFetching: false, ids: [] }, action) => {
   switch (action.type) {
     case types.FETCH_RELATEDKEYWORDS_REQUEST:
       return {
         ...state,
-        isFetchin: true
+        isFetching: true
       }
     case types.FETCH_RELATEDKEYWORDS_SUCCESS:
       return {
         ...state,
-        isFetchin: false,
+        isFetching: false,
         ids: [...action.fetchedData.ids]
       }
     case types.FETCH_RELATEDKEYWORDS_FAILURE:
       return {
         ...state,
-        isFetchin: false
+        isFetching: false
       }
     default:
       return state
@@ -194,11 +226,50 @@ const historyKeywordReducer = (state = initialstate.historyKeywords, action) => 
   }
 }
 
+const shopsByKeywordReducer = (state = initialstate.shopsByKeyword, action) => {
+  const { keyword } = action
+  switch (action.type) {
+    case types.FETCH_SHOPSBYKEYWORD_REQUEST:
+    case types.FETCH_SHOPSBYKEYWORD_SUCCESS:
+    case types.FETCH_SHOPSBYKEYWORD_FAILURE:
+      return {
+        ...state,
+        [keyword]: keywordShopsSubReducer(state[keyword], action)
+      }
+    default:
+      return state;
+  }
+}
+
+const keywordShopsSubReducer = (state = { isFetching: false, ids: [] }, action) => {
+  switch (action.type) {
+    case types.FETCH_SHOPSBYKEYWORD_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case types.FETCH_SHOPSBYKEYWORD_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        ids: [...action.fetchedData.ids]
+      }
+    case types.FETCH_SHOPSBYKEYWORD_FAILURE:
+      return {
+        ...state,
+        isFetching: false
+      }
+    default:
+      return state
+  }
+}
+
 const searchReducer = combineReducers({
   inputText: inputTextReducer,
   popularKeywords: popularKeywordsReducer,
   historyKeywords: historyKeywordReducer,
-  relatedKeywords: relatedKeywordReducer
+  relatedKeywords: relatedKeywordReducer,
+  shopsByKeyword: shopsByKeywordReducer
 })
 
 export default searchReducer
@@ -219,8 +290,8 @@ export const historyKeywordsSelector = (state) => {
 }
 
 export const relatedKeywordsSelector = (state) => {
-  const keyword = state.search.inputText
-  const keywordrelatedInfo = state.search.relatedKeywords[keyword]
+  const text = state.search.inputText
+  const keywordrelatedInfo = state.search.relatedKeywords[text]
   if (keywordrelatedInfo) {
     if (keywordrelatedInfo.ids) {
       return keywordrelatedInfo.ids.map(id => {
@@ -229,4 +300,21 @@ export const relatedKeywordsSelector = (state) => {
     }
   }
   return null
+}
+
+export const keywordSelector = (state) => {
+  return state.search.historyKeywords[0]
+}
+
+export const shopsByKeywordSelector = (state) => {
+  const keyword = keywordSelector(state)
+  const shopsByKeyword = state.search.shopsByKeyword[keyword]
+  if (shopsByKeyword && shopsByKeyword.ids) {
+    const shops = shopsByKeyword.ids.map(id => {
+      return getShopByIdSelector(state, id)
+    })
+    return shops
+  } else {
+    return null
+  }
 }

@@ -16,15 +16,11 @@ class Search extends Component {
     const { inputText, setInputText, clearInputText, relatedKeywords, popularKeywords, historyKeywords, clearSearchHistory, addKeywordToHistory, history, relatedKeywordsRequest } = this.props
     return (
       <div>
-        <SearchBox inputText={inputText} setInputText={setInputText} clearInputText={clearInputText} goBack={this.goBack} relatedKeywords={relatedKeywords} addKeywordToHistory={addKeywordToHistory} history={history} relatedKeywordsRequest={relatedKeywordsRequest} />
+        <SearchBox inputText={inputText} setInputText={setInputText} clearInputText={clearInputText} relatedKeywords={relatedKeywords} addKeywordToHistory={addKeywordToHistory} history={history} relatedKeywordsRequest={relatedKeywordsRequest} />
         <PopularSearch popularKeywords={popularKeywords} addKeywordToHistory={addKeywordToHistory} history={history} />
         <SearchHistory historyKeywords={historyKeywords} clearSearchHistory={clearSearchHistory} />
       </div>
     )
-  }
-
-  goBack = () => {
-    this.props.history.goBack()
   }
 }
 

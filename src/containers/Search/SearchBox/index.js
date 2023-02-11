@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import './style.css'
 
 export default class SearchBox extends Component {
-  state = {
-    inputText: ''
-  }
 
   render() {
     const { inputText } = this.props
@@ -13,7 +10,7 @@ export default class SearchBox extends Component {
         <div className="searchBox__container">
           <input className="searchBox__text" placeholder='Enter a shop / place' value={inputText} onChange={this.handleChange} />
           <span className="searchBox__clear" onClick={this.props.clearInputText}></span>
-          <span className="searchBox__cancel" onClick={this.props.goBack}>Cancel</span>
+          <span className="searchBox__cancel" onClick={this.handleCancel}>Cancel</span>
         </div>
         {inputText ? this.renderSuggestList() : null}
       </div>
@@ -54,7 +51,11 @@ export default class SearchBox extends Component {
     this.props.addKeywordToHistory(item.keyword)
     this.props.clearInputText()
     // go to Search Results Page
-    this.props.history.push('/searchresults', { keyword: item.keyword })
+    this.props.history.push('/searchresults')
   }
 
+  handleCancel = () => {
+    this.props.clearInputText()
+    this.props.history.push('/')
+  }
 }
