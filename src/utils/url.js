@@ -5,7 +5,8 @@ const url = {
   getShop: (id) => (`/mock/shops/${id}.json`),
   getPopularKeywords: () => (`/mock/keywords/popular.json`),
   getRelatedKeywords: (keyword) => (`/mock/keywords/related.json?keyword=${keyword}`),
-  getShopsByKeyword: (keyword) => (`/mock/shops/related.json?keyword=${keyword}`)
+  getShopsByKeyword: (keyword) => (`/mock/shops/related.json?keyword=${keyword}`),
+  getOrders: () => (`/mock/orders/orders.json`),
 }
 
 export default url

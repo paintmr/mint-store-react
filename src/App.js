@@ -22,8 +22,8 @@ class App extends Component {
             <Route path="/search" component={Search} />
             <Route path="/searchresults" component={SearchResults} />
             <Route path="/login" component={Login} />
-            {/* PrivateRoute is a special route to make sure that only certain users can visit. For example, only users having logined can visit the usercentre page */}
-            <PrivateRoute path="/usercentre" component={UserCentre} />
+            {/* PrivateRoute is a special route to make sure that only certain users can visit certain pages. For example, only users having logined in can visit the UserCentre page */}
+            <PrivateRoute path="/userCentre" component={UserCentre} />
             <Route path="/" component={Home} />
           </Switch>
         </BrowserRouter>

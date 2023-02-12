@@ -5,6 +5,7 @@ import appReducer from "./app";
 import productDetailPage from "./productdetails";
 import searchReducer from "./search";
 import loginReducer from "./login"
+import userCentreReducer from "./usercentre";
 
 const rootReducer = combineReducers({
   entities: entityReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   app: appReducer,
   productDetailPage,
   search: searchReducer,
-  login: loginReducer
+  login: loginReducer,
+  userCentre: userCentreReducer
 })
 
 export default rootReducer

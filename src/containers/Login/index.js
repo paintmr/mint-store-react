@@ -11,15 +11,15 @@ class Login extends Component {
 
     // Check the user's login status
     if (loginStatus) {
-      // if login, check where has the user been redirected from
+      // if the user has logged in, check where has the user been redirected from
       if (state && state.from) {
         // redirect the user to the page before login 
         return <Redirect to={state.from} />
       }
-      // if the user has not been redirected, now redirect her to the user centre page 
+      // if the user has not been redirected, now redirect her to the UserCentre page 
       return <Redirect to='/usercentre' />
     }
-    // if not login, suggest the user login 
+    // if not the user has not logged in, suggest the user to log in 
     return (
       <div>
         <LoginHeader />

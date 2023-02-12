@@ -76,7 +76,7 @@ const loginReducer = (state = initialState, action) => {
         isLogining: false,
         loginStatus: true
       }
-    case types.LOGIN_REQUEST:
+    case types.LOGIN_FAILURE:
       return {
         ...state,
         isLogining: false
