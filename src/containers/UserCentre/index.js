@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UserHeader from './components/UserHeader'
-import UserMain from './components/UserMain'
+import UserMain from './containers/UserMain'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/modules/login'
 import { ordersReqest, changeTab, tabIndexSelector, ordersSelector } from '../../redux/modules/usercentre'

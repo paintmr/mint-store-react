@@ -52,13 +52,13 @@ All data-request is sent by this middleware, which prevents redundant code.
 
 The dataFetching.js file detects if the action contains the key 'FETCH_DATA' which contains a string array containing requestType, successType, and failureType. If the key 'FETCH_DATA' exists, the dataFetching.js file will dispatch these three request types. Otherwise, it will pass the action to the next reducer/middleware.
 
-## Home
+## Home page
 
 On the Home page, when it is mounted, it displays product data in the discount list and recommended list.
 
 When the user scrolls the screen, she can get more of the recommended list until she gets the end of the list.
 
-## Product Details
+## Product Details page
 
 Every time the user click a product, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
 
@@ -66,7 +66,7 @@ To make this works, redux provides not only product details but also shops relat
 
 When the user clicks the two "Buy Now" buttons, she is directed to the Purchase page.
 
-## Search
+## Search page
 
 When the user clicks the search bar at the top of the Home page, she is directed to the Search page.
 
@@ -74,11 +74,11 @@ When she inputs something into the input box, a related search keyword list occu
 
 When she clicks the keyword either in the related search keyword list or the popular search keyword list, they keyword is added to the search history list, and she is directed to the search result page.
 
-## Search Results
+## Search Results page
 
 On the search results page, she user sees shops related to the keyword she has just clicked.
 
-## Login
+## Login page
 
 When the user clickes the human figure icon on the top right of the Home page, she is either directed to the UserCentre page if she has logged in or redirected to the Login page if she has not logged in.
 
@@ -86,4 +86,16 @@ Building a PrivateRoute component can make this happen.
 
 When the user has inputed a random number and a password, she can login. And the number and login status are stored by localStorage.
 
-## UserCentre
+## UserCentre page
+
+### Display Orders
+
+When the user is on the UserCentre page, she can click the home button on the top left to go back to the Home page and the logout button to log out.
+
+When the use clicks tabs like "All", "To be paid", "Completed", and "Refund", she can see differnt order list.
+
+### Delete Orders
+
+To handle deletion and comments conveniently, change UserMain from a UI Component to a Container
+
+When the user clicks the delete button, she can delete the order.

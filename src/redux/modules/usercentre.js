@@ -6,22 +6,27 @@ import { getOrderById } from "./entities/orders"
 const initialState = {
   orders: {
     isFetching: false,
-    idsAll: [],
-    idsToBePaid: [],
-    idsAvailable: [],
-    idsRefund: []
+    ids: []
   },
-  tabIndex: 0
-
+  tabIndex: 0,
+  deletingOrder: {
+    isDeleting: false,
+    id: null
+  }
 }
 
 // action types
-const types = {
+export const types = {
   FETCH_ORDERS_REQUEST: 'FETCH_ORDERS_REQUEST',
   FETCH_ORDERS_SUCCESS: 'FETCH_ORDERS_SUCCESS',
   FETCH_ORDERS_FAILURE: 'FETCH_ORDERS_REQUEST',
 
-  CHANGE_TAB: 'CHANGE_TAB'
+  CHANGE_TAB: 'CHANGE_TAB',
+
+  DELETE_ORDER_REQUEST: 'DELETE_ORDER_REQUEST',
+  DELETE_ORDER_CANCEL: 'DELETE_ORDER_CANCEL',
+  DELETE_ORDER_CONFIRM: 'DELETE_ORDER_CONFIRM',
+  DELETE_ORDER_FAILURE: 'DELETE_ORDER_FAILURE',
 }
 
 // action groups for middleware/dataFetching.js to process
@@ -53,6 +58,27 @@ export const changeTab = (index) => {
   }
 }
 
+export const deleteOrderRequest = (id) => {
+  return { type: types.DELETE_ORDER_REQUEST, id }
+}
+
+export const cancelDeleteOrder = () => {
+  return { type: types.DELETE_ORDER_CANCEL }
+}
+
+export const confirmDeleteOrder = () => {
+  return (dispatch, getState) => {
+    const orderId = getState().userCentre.deletingOrder.id
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        dispatch({ type: types.DELETE_ORDER_CONFIRM, orderId })
+        resolve()
+      }, 500)
+    })
+  }
+}
+
+
 // reducers
 const userCentreReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,6 +103,48 @@ const userCentreReducer = (state = initialState, action) => {
         ...state,
         tabIndex: action.index
       }
+    case types.DELETE_ORDER_REQUEST:
+      return {
+        ...state,
+        deletingOrder: {
+          isDeleting: true,
+          id: action.id
+        }
+      }
+    case types.DELETE_ORDER_CANCEL:
+      return {
+        ...state,
+        deletingOrder: {
+          isDeleting: false,
+          id: null
+        }
+      }
+    case types.DELETE_ORDER_CONFIRM:
+      const newIds = state.orders.ids.filter(id => {
+        if (id === action.orderId) {
+          return false
+        }
+        return true
+      })
+      return {
+        ...state,
+        orders: {
+          isFetching: false,
+          ids: [...newIds]
+        },
+        deletingOrder: {
+          isDeleting: false,
+          id: null
+        }
+      }
+    case types.DELETE_ORDER_FAILURE:
+      return {
+        ...state,
+        deletingOrder: {
+          isDeleting: false,
+          id: null
+        }
+      }
     default:
       return state
   }
@@ -89,6 +157,7 @@ export default userCentreReducer
 export const tabIndexSelector = (state) => {
   return state.userCentre.tabIndex
 }
+
 export const ordersSelector = (state) => {
   const tabIndex = tabIndexSelector(state)
   const ids = state.userCentre.orders.ids
@@ -105,9 +174,9 @@ export const ordersSelector = (state) => {
           }
           return false
         })
-      case orderTypes.AVAILABLE:
+      case orderTypes.COMPLETED:
         return orders.filter(order => {
-          if (order.type === orderTypes.AVAILABLE) {
+          if (order.type === orderTypes.COMPLETED) {
             return true
           }
           return false
@@ -116,4 +185,8 @@ export const ordersSelector = (state) => {
         return null
     }
   }
+}
+
+export const deletingOrderStatusSelector = (state) => {
+  return state.userCentre.deletingOrder.isDeleting
 }

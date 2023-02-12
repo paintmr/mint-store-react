@@ -4,7 +4,7 @@ import "./style.css"
 class OrderItem extends Component {
   render() {
     const {
-      data: { title, statusText, orderPicUrl, channel, text, type }
+      data: { title, statusText, orderPicUrl, channel, text, type }, deleteOrderRequest
     } = this.props;
     return (
       <div className="orderItem">
@@ -24,8 +24,8 @@ class OrderItem extends Component {
         <div className="orderItem__bottom">
           <div className="orderItem__type">{channel}</div>
           <div>
-            {type === 1 ? <div className="orderItem__btn">评价</div> : null}
-            <div className="orderItem__btn">删除</div>
+            {type === 2 ? <div className="orderItem__btn">Comment</div> : null}
+            <div className="orderItem__btn" onClick={deleteOrderRequest}>Delete</div>
           </div>
         </div>
       </div>

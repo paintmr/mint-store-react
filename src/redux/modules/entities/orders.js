@@ -1,3 +1,4 @@
+import { types } from "../usercentre"
 export const entityOrders = {
   entityName: 'orders',
   id: 'id'
@@ -6,7 +7,7 @@ export const entityOrders = {
 export const orderTypes = {
   ALL: 0,
   TO_BE_PAID: 1,
-  AVAILABLE: 2,
+  COMPLETED: 2,
   REFUND: 3,
 }
 
@@ -16,6 +17,9 @@ const orderReducer = (state = {}, action) => {
       ...state,
       ...action.fetchedData.orders
     }
+  } else if (action.type === types.DELETE_ORDER_CONFIRM) {
+    const { [action.orderId]: orderTobeDeleted, ...restOrders } = state
+    return restOrders
   }
   return state
 }
