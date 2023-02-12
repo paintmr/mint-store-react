@@ -1,8 +1,8 @@
 const initialState = {
   isLogining: false,
-  userName: '',
+  userName: localStorage.getItem("userName") || '',
   password: '',
-  login: false
+  loginStatus: localStorage.getItem("loginStatus") || false
 }
 
 // action types
@@ -31,17 +31,25 @@ export const setPassword = (password) => ({
 export const login = () => {
   return (dispatch, getState) => {
     dispatch({ type: types.LOGIN_REQUEST })
-    const { userName, password } = getState().login
+    const { userName, password, loginStatus } = getState().login
     if (!(userName && userName.length > 0 && password && password.length > 0)) {
       dispatch({ type: types.LOGIN_FAILURE, error: 'Please enter username and password.' })
     }
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+        localStorage.setItem('userName', userName)
+        localStorage.setItem('loginStatus', loginStatus)
         dispatch({ type: types.LOGIN_SUCCESS })
         resolve()
       }, 500)
     })
   }
+}
+
+export const logout = () => {
+  localStorage.removeItem('userName')
+  localStorage.removeItem('loginStatus')
+  return { type: types.LOGOUT }
 }
 
 // reducer
@@ -66,7 +74,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLogining: false,
-        login: true
+        loginStatus: true
       }
     case types.LOGIN_REQUEST:
       return {
@@ -78,7 +86,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         userName: '',
         password: '',
-        login: false
+        loginStatus: false
       }
     default:
       return state
@@ -95,4 +103,8 @@ export const userNameSelector = (state) => {
 
 export const passwordSelector = (state) => {
   return state.login.password
+}
+
+export const loginStatusSelector = (state) => {
+  return state.login.loginStatus
 }
