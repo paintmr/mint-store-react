@@ -1,7 +1,7 @@
-import { entityOrders } from "./entities/orders"
+import { entityOrders, orderTypes, getOrderById } from "./entities/orders"
 import url from "../../utils/url"
-import { orderTypes } from "./entities/orders"
-import { getOrderById } from "./entities/orders"
+import { combineReducers } from "redux"
+import { nanoid } from "nanoid";
 
 const initialState = {
   orders: {
@@ -9,9 +9,14 @@ const initialState = {
     ids: []
   },
   tabIndex: 0,
-  deletingOrder: {
+  currentOrder: {
     isDeleting: false,
-    id: null
+    id: null,
+    isCommenting: false,
+    comment: '',
+    starNum: 0,
+    changeCommentingOrder: false,
+    nextId: null
   }
 }
 
@@ -27,6 +32,17 @@ export const types = {
   DELETE_ORDER_CANCEL: 'DELETE_ORDER_CANCEL',
   DELETE_ORDER_CONFIRM: 'DELETE_ORDER_CONFIRM',
   DELETE_ORDER_FAILURE: 'DELETE_ORDER_FAILURE',
+
+  COMMENT_ORDER_REQUEST: 'COMMENT_ORDER_REQUEST',
+  COMMENT_ORDER_CANCEL: 'COMMENT_ORDER_CANCEL',
+  COMMENT_ORDER_SUMBIT: 'COMMENT_ORDER_SUMBIT',
+  COMMENT_ORDER_FAILURE: 'COMMENT_ORDER_FAILURE',
+
+  SET_COMMENT_ORDER_TEXT: 'SET_COMMENT_ORDER_TEXT',
+  SET_COMMENT_ORDER_STARS: 'SET_COMMENT_ORDER_STARS',
+  CHANGE_COMMENTING_ORDER_REQUEST: 'CHANGE_COMMENTING_ORDER_REQUEST',
+  CANCEL_CHANGE_COMMENTING_ORDER: 'CANCEL_CHANGE_COMMENTING_ORDER',
+  COMFIRM_CHANGE_COMMENTING_ORDER: 'COMFIRM_CHANGE_COMMENTING_ORDER',
 }
 
 // action groups for middleware/dataFetching.js to process
@@ -68,7 +84,7 @@ export const cancelDeleteOrder = () => {
 
 export const confirmDeleteOrder = () => {
   return (dispatch, getState) => {
-    const orderId = getState().userCentre.deletingOrder.id
+    const orderId = getState().userCentre.currentOrder.id
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         dispatch({ type: types.DELETE_ORDER_CONFIRM, orderId })
@@ -78,49 +94,68 @@ export const confirmDeleteOrder = () => {
   }
 }
 
+export const commentOrderRequest = (id) => {
+  return { type: types.COMMENT_ORDER_REQUEST, id }
+}
+
+export const cancelOrderComment = () => {
+  return { type: types.COMMENT_ORDER_CANCEL }
+}
+
+export const setCommentText = (text) => {
+  return { type: types.SET_COMMENT_ORDER_TEXT, text }
+}
+
+export const setCommentStars = (starNum) => {
+  return { type: types.SET_COMMENT_ORDER_STARS, starNum }
+}
+
+export const changeCommentingOrderRequest = (nextId) => {
+  return { type: types.CHANGE_COMMENTING_ORDER_REQUEST, nextId }
+}
+
+
+export const cancelChangeCommentingOrder = () => {
+  return { type: types.CANCEL_CHANGE_COMMENTING_ORDER }
+}
+
+export const confirmChangeCommentingOrder = (nextId) => {
+  return { type: types.COMFIRM_CHANGE_COMMENTING_ORDER, nextId }
+}
+
+export const submitOrderComment = () => {
+  return (dispatch, getState) => {
+    const { comment, starNum, id } = getState().userCentre.currentOrder
+    const newCommentObj = {
+      commentId: nanoid(),
+      comment,
+      starNum,
+    }
+    dispatch({ type: types.COMMENT_ORDER_SUMBIT, newCommentObj, orderId: id, successMessage: 'Successfully added a comment.' })
+  }
+}
+
 
 // reducers
-const userCentreReducer = (state = initialState, action) => {
+const ordersReducer = (state = initialState.orders, action) => {
   switch (action.type) {
     case types.FETCH_ORDERS_REQUEST:
       return {
         ...state,
-        orders: {
-          ...state,
-          isFetching: true
-        }
+        isFetching: true
       }
     case types.FETCH_ORDERS_SUCCESS:
       return {
-        ...state,
-        orders: {
-          isFetching: false,
-          ids: [...action.fetchedData.ids]
-        }
+        isFetching: false,
+        ids: [...action.fetchedData.ids]
       }
-    case types.CHANGE_TAB:
+    case types.FETCH_ORDERS_FAILURE:
       return {
         ...state,
-        tabIndex: action.index
-      }
-    case types.DELETE_ORDER_REQUEST:
-      return {
-        ...state,
-        deletingOrder: {
-          isDeleting: true,
-          id: action.id
-        }
-      }
-    case types.DELETE_ORDER_CANCEL:
-      return {
-        ...state,
-        deletingOrder: {
-          isDeleting: false,
-          id: null
-        }
+        isFetching: false
       }
     case types.DELETE_ORDER_CONFIRM:
-      const newIds = state.orders.ids.filter(id => {
+      const newIds = state.ids.filter(id => {
         if (id === action.orderId) {
           return false
         }
@@ -128,28 +163,89 @@ const userCentreReducer = (state = initialState, action) => {
       })
       return {
         ...state,
-        orders: {
-          isFetching: false,
-          ids: [...newIds]
-        },
-        deletingOrder: {
-          isDeleting: false,
-          id: null
-        }
+        ids: [...newIds]
       }
+    default:
+      return state
+  }
+}
+
+const tabIndexReducer = (state = initialState.tabIndex, action) => {
+  switch (action.type) {
+    case types.CHANGE_TAB:
+      return action.index
+    default:
+      return state
+  }
+}
+const currentOrderReducer = (state = initialState.currentOrder, action) => {
+  switch (action.type) {
+    case types.DELETE_ORDER_REQUEST:
+      return {
+        isDeleting: true,
+        id: action.id
+      }
+    case types.DELETE_ORDER_CANCEL:
     case types.DELETE_ORDER_FAILURE:
+    case types.DELETE_ORDER_CONFIRM:
       return {
         ...state,
-        deletingOrder: {
-          isDeleting: false,
-          id: null
-        }
+        isDeleting: false,
+        id: null
+      }
+    case types.COMMENT_ORDER_REQUEST:
+      return {
+        ...state,
+        isCommenting: true,
+        id: action.id,
+        comment: '',
+        starNum: 0
+      }
+    case types.COMMENT_ORDER_CANCEL:
+    case types.COMMENT_ORDER_SUMBIT:
+      return initialState.currentOrder
+    case types.SET_COMMENT_ORDER_TEXT:
+      return {
+        ...state,
+        comment: action.text
+      }
+    case types.SET_COMMENT_ORDER_STARS:
+      return {
+        ...state,
+        starNum: action.starNum
+      }
+    case types.CHANGE_COMMENTING_ORDER_REQUEST:
+      return {
+        ...state,
+        changeCommentingOrder: true,
+        nextId: action.nextId
+      }
+    case types.CANCEL_CHANGE_COMMENTING_ORDER:
+      return {
+        ...state,
+        changeCommentingOrder: false,
+      }
+    case types.COMFIRM_CHANGE_COMMENTING_ORDER:
+      return {
+        ...state,
+        changeCommentingOrder: false,
+        nextId: null,
+        isCommenting: true,
+        id: action.nextId,
+        comment: '',
+        starNum: 0
       }
     default:
       return state
   }
 
 }
+
+const userCentreReducer = combineReducers({
+  orders: ordersReducer,
+  tabIndex: tabIndexReducer,
+  currentOrder: currentOrderReducer
+})
 
 export default userCentreReducer
 
@@ -181,12 +277,20 @@ export const ordersSelector = (state) => {
           }
           return false
         })
+      case orderTypes.REFUND:
+        return orders.filter(order => {
+          if (order.type === orderTypes.REFUND) {
+            return true
+          }
+          return false
+        })
       default:
         return null
     }
   }
 }
 
-export const deletingOrderStatusSelector = (state) => {
-  return state.userCentre.deletingOrder.isDeleting
+
+export const currentOrderSelector = (state) => {
+  return state.userCentre.currentOrder
 }

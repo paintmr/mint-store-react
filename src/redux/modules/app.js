@@ -1,10 +1,12 @@
 const initialState = {
-  error: ''
+  error: '',
+  successMessage: ''
 }
 
 // action types
 const types = {
-  CLEAR_ERROR: 'CLEAR_ERROR'
+  CLEAR_ERROR: 'CLEAR_ERROR',
+  CLEAR_SUCCESS_MESSAGE: 'CLEAR_SUCCESS_MESSAGE'
 }
 
 // action creators
@@ -14,7 +16,11 @@ export const clearError = () => {
   }
 }
 
-
+export const clearSuccessMessage = () => {
+  return {
+    type: types.CLEAR_SUCCESS_MESSAGE
+  }
+}
 
 // reducers
 const appReducer = (state = initialState, action) => {
@@ -30,6 +36,18 @@ const appReducer = (state = initialState, action) => {
       error: ''
     }
   }
+  else if (action.successMessage) {
+    return {
+      ...state,
+      successMessage: action.successMessage
+    }
+  }
+  else if (action.type === types.CLEAR_SUCCESS_MESSAGE) {
+    return {
+      ...state,
+      successMessage: ''
+    }
+  }
   return state
 }
 export default appReducer
@@ -37,4 +55,7 @@ export default appReducer
 // selectors
 export const errorSelector = state => {
   return state.app.error
+}
+export const successMessageSelector = state => {
+  return state.app.successMessage
 }

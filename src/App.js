@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Home from './containers/Home'
 import "./App.css"
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import ErrorToast from './components/ErrorToast'
+import MessageToast from './components/MessageToast'
 import { connect } from 'react-redux'
 import { errorSelector, clearError } from './redux/modules/app'
 import ProductDetails from './containers/ProductDetails'
@@ -28,7 +28,7 @@ class App extends Component {
           </Switch>
         </BrowserRouter>
 
-        {this.props.error ? <ErrorToast error={this.props.error} clearError={this.props.clearError} /> : null}
+        {this.props.error ? <MessageToast error={this.props.error} clearError={this.props.clearError} /> : null}
       </div>
     )
   }

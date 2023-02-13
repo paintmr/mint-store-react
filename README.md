@@ -99,3 +99,17 @@ When the use clicks tabs like "All", "To be paid", "Completed", and "Refund", sh
 To handle deletion and comments conveniently, change UserMain from a UI Component to a Container
 
 When the user clicks the delete button, she can delete the order.
+
+### Comment Orders
+
+Only completed orders which have not been commented have a comment button.
+
+The user can click the comment button and then see a textarea to write comments. Shen can also click the star bars to give star ranking.
+
+If she has written something in the comment textarea or clicked the ranking stars of an order, and then she clicks the comment button of another order, a warming dialog pops up to tell her that her comment has not been saved.
+
+The id of the newly added comment is stored with the related order in redux/modules/entities/orders.
+
+The newly added comment object is stored in redux/modules/entities/comments.
+
+When the comment has been stored, a success message pops out.

@@ -25,6 +25,18 @@
   },
   {
     "id": "o-4",
+    "statusText": "COMPLETED",
+    "orderPicUrl": "http://p1.meituan.net/deal/0bd2cfdbece6a84259774d3b1f80d6262604740.jpg",
+    "channel": "Group Buying",
+    "title": "SJ Roast",
+    "text": [
+      "2 coupons | price: $99.00",
+      "valid untill November 27"
+    ],
+    "type": 2
+  },
+  {
+    "id": "o-5",
     "statusText": "TOBEPAID",
     "orderPicUrl": "https://p0.meituan.net/deal/e4f7972d34b289a00ae2491c70359024128785.jpg.webp@700w_700h_1e_1c_1l|watermark=1&&r=1&p=9&x=20&y=20",
     "channel": "Group Buying",

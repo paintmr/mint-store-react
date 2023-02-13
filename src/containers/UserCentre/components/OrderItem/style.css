@@ -102,6 +102,7 @@
   border: 1px solid #f1f1f1;
   box-sizing: border-box;
   margin-top: 10px;
+  outline: none;
 }
 
 .orderItem__starContainer {
