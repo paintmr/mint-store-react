@@ -6,6 +6,7 @@ import productDetailPage from "./productdetails";
 import searchReducer from "./search";
 import loginReducer from "./login"
 import userCentreReducer from "./usercentre";
+import purchaseReducer from "./purchase";
 
 const rootReducer = combineReducers({
   entities: entityReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   productDetailPage,
   search: searchReducer,
   login: loginReducer,
-  userCentre: userCentreReducer
+  userCentre: userCentreReducer,
+  purchase: purchaseReducer
 })
 
 export default rootReducer

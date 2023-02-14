@@ -92,7 +92,7 @@ When the user has inputed a random number and a password, she can login. And the
 
 When the user is on the UserCentre page, she can click the home button on the top left to go back to the Home page and the logout button to log out.
 
-When the use clicks tabs like "All", "To be paid", "Completed", and "Refund", she can see differnt order list.
+When the use clicks tabs like "All", "Available", "Completed", and "Refund", she can see differnt order list.
 
 ### Delete Orders
 
@@ -113,3 +113,11 @@ The id of the newly added comment is stored with the related order in redux/modu
 The newly added comment object is stored in redux/modules/entities/comments.
 
 When the comment has been stored, a success message pops out.
+
+## Purchase page
+
+When the user clicks the two buy buttons on the ProductDetails page, she is directed to the Purchase page.
+
+When the user has placed orders, a dialog pops out to show the success.
+
+When the user clicks the word 'my orders', she is directed to the UserCenter page to vew her orders including the newly-added ones.

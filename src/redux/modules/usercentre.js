@@ -2,11 +2,13 @@ import { entityOrders, orderTypes, getOrderById } from "./entities/orders"
 import url from "../../utils/url"
 import { combineReducers } from "redux"
 import { nanoid } from "nanoid";
+import { purchaseTypes } from "./purchase";
 
 const initialState = {
   orders: {
     isFetching: false,
-    ids: []
+    ids: [],
+    fetched: false
   },
   tabIndex: 0,
   currentOrder: {
@@ -63,7 +65,12 @@ const fetchOrders = (url) => {
 // action creators
 export const ordersReqest = () => {
   return (dispatch, getState) => {
-    dispatch(fetchOrders(url.getOrders()))
+    const { fetched } = getState().userCentre.orders
+    if (!fetched) {
+      dispatch(fetchOrders(url.getOrders()))
+    } else {
+      return null
+    }
   }
 }
 
@@ -147,7 +154,8 @@ const ordersReducer = (state = initialState.orders, action) => {
     case types.FETCH_ORDERS_SUCCESS:
       return {
         isFetching: false,
-        ids: [...action.fetchedData.ids]
+        ids: [...state.ids, ...action.fetchedData.ids],
+        fetched: true
       }
     case types.FETCH_ORDERS_FAILURE:
       return {
@@ -164,6 +172,11 @@ const ordersReducer = (state = initialState.orders, action) => {
       return {
         ...state,
         ids: [...newIds]
+      }
+    case purchaseTypes.SUBMIT_ORDER_SUCCESS:
+      return {
+        ...state,
+        ids: [action.newOrder.id, ...state.ids]
       }
     default:
       return state
@@ -263,9 +276,9 @@ export const ordersSelector = (state) => {
     switch (tabIndex) {
       case orderTypes.ALL:
         return orders
-      case orderTypes.TO_BE_PAID:
+      case orderTypes.AVAILABLE:
         return orders.filter(order => {
-          if (order.type === orderTypes.TO_BE_PAID) {
+          if (order.type === orderTypes.AVAILABLE) {
             return true
           }
           return false

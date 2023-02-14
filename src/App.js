@@ -11,6 +11,7 @@ import SearchResults from './containers/SearchResults'
 import Login from './containers/Login'
 import PrivateRoute from './containers/PrivateRoute'
 import UserCentre from './containers/UserCentre'
+import Purchase from './containers/Purchase'
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             {/* PrivateRoute is a special route to make sure that only certain users can visit certain pages. For example, only users having logined in can visit the UserCentre page */}
             <PrivateRoute path="/userCentre" component={UserCentre} />
+            <PrivateRoute path="/purchase/:id" component={Purchase} />
             <Route path="/" component={Home} />
           </Switch>
         </BrowserRouter>

@@ -1,4 +1,6 @@
 import { types } from "../usercentre"
+import { purchaseTypes } from "../purchase"
+
 export const entityOrders = {
   entityName: 'orders',
   id: 'id'
@@ -6,7 +8,7 @@ export const entityOrders = {
 
 export const orderTypes = {
   ALL: 0,
-  TO_BE_PAID: 1,
+  AVAILABLE: 1,
   COMPLETED: 2,
   REFUND: 3,
 }
@@ -30,7 +32,15 @@ const orderReducer = (state = {}, action) => {
       ...state,
       [orderId]: order
     }
+  } else if (action.type === purchaseTypes.SUBMIT_ORDER_SUCCESS) {
+    const { newOrder } = action
+    const { id } = newOrder
+    return {
+      ...state,
+      [id]: newOrder
+    }
   }
+
   return state
 }
 

@@ -12,7 +12,7 @@ import MessageToast from "../../../../components/MessageToast"
 import { successMessageSelector, clearSuccessMessage } from "../../../../redux/modules/app";
 
 
-const tabTitles = ["All", "To be paid", "Completed", "Refund"];
+const tabTitles = ["All", "Available", "Completed", "Refund"];
 
 class UserMain extends Component {
 

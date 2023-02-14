@@ -1,7 +1,7 @@
 [
   {
     "id": "o-2",
-    "statusText": "TOBEPAID",
+    "statusText": "AVAILABLE",
     "orderPicUrl": "https://p1.meituan.net/deal/95e79382c20a78da3068c4207ab7a9b4329494.jpg.webp@700w_700h_1e_1c_1l|watermark=1&&r=1&p=9&x=20&y=20",
     "channel": "Group Buying",
     "title": "Walice: Set Meal",
@@ -37,7 +37,7 @@
   },
   {
     "id": "o-5",
-    "statusText": "TOBEPAID",
+    "statusText": "AVAILABLE",
     "orderPicUrl": "https://p0.meituan.net/deal/e4f7972d34b289a00ae2491c70359024128785.jpg.webp@700w_700h_1e_1c_1l|watermark=1&&r=1&p=9&x=20&y=20",
     "channel": "Group Buying",
     "title": "Aken: Fried Chicken",
