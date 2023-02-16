@@ -80,7 +80,7 @@ class PurchaseForm extends Component {
   };
 
   handleChange = (e) => {
-    const quantity = parseInt(e.target.value)
+    const quantity = parseInt(e.target.value, 10)
     this.props.setQuantity(quantity)
   };
 

@@ -12,7 +12,6 @@ import Login from './containers/Login'
 import PrivateRoute from './containers/PrivateRoute'
 import UserCentre from './containers/UserCentre'
 import Purchase from './containers/Purchase'
-
 class App extends Component {
   render() {
     return (

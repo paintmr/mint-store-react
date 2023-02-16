@@ -121,3 +121,9 @@ When the user clicks the two buy buttons on the ProductDetails page, she is dire
 When the user has placed orders, a dialog pops out to show the success.
 
 When the user clicks the word 'my orders', she is directed to the UserCenter page to vew her orders including the newly-added ones.
+
+## Reselect
+
+Use Reselect to prevent some unnecessary selector execution.
+
+Reselect is applied to ordersSelector in src/redux/modules/usercentre.js

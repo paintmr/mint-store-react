@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   login: loginReducer,
   userCentre: userCentreReducer,
-  purchase: purchaseReducer
+  purchase: purchaseReducer,
 })
 
 export default rootReducer

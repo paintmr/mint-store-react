@@ -1,13 +1,18 @@
-import { entityOrders, orderTypes, getOrderById } from "./entities/orders"
+import { entityOrders, orderCategories, getAllOrdersSelector } from "./entities/orders"
 import url from "../../utils/url"
 import { combineReducers } from "redux"
 import { nanoid } from "nanoid";
 import { purchaseTypes } from "./purchase";
 
+import { createSelector } from "reselect";
+
 const initialState = {
   orders: {
     isFetching: false,
     ids: [],
+    // idsAvailable: [],
+    // idsCompleted: [],
+    // idsRefund: [],
     fetched: false
   },
   tabIndex: 0,
@@ -142,7 +147,6 @@ export const submitOrderComment = () => {
   }
 }
 
-
 // reducers
 const ordersReducer = (state = initialState.orders, action) => {
   switch (action.type) {
@@ -195,17 +199,14 @@ const currentOrderReducer = (state = initialState.currentOrder, action) => {
   switch (action.type) {
     case types.DELETE_ORDER_REQUEST:
       return {
+        ...state,
         isDeleting: true,
         id: action.id
       }
     case types.DELETE_ORDER_CANCEL:
     case types.DELETE_ORDER_FAILURE:
     case types.DELETE_ORDER_CONFIRM:
-      return {
-        ...state,
-        isDeleting: false,
-        id: null
-      }
+      return initialState.currentOrder
     case types.COMMENT_ORDER_REQUEST:
       return {
         ...state,
@@ -216,6 +217,7 @@ const currentOrderReducer = (state = initialState.currentOrder, action) => {
       }
     case types.COMMENT_ORDER_CANCEL:
     case types.COMMENT_ORDER_SUMBIT:
+    case types.COMMENT_ORDER_FAILURE:
       return initialState.currentOrder
     case types.SET_COMMENT_ORDER_TEXT:
       return {
@@ -267,32 +269,32 @@ export const tabIndexSelector = (state) => {
   return state.userCentre.tabIndex
 }
 
-export const ordersSelector = (state) => {
-  const tabIndex = tabIndexSelector(state)
-  const ids = state.userCentre.orders.ids
-  if (ids) {
-    const orders = ids.map(id => { return getOrderById(state, id) })
+export const ordersSelector = createSelector(
+  [tabIndexSelector, getAllOrdersSelector],
+  (tabIndex, allOrders) => {
+
+    const orders = Object.values(allOrders)
 
     switch (tabIndex) {
-      case orderTypes.ALL:
+      case orderCategories.ALL:
         return orders
-      case orderTypes.AVAILABLE:
+      case orderCategories.AVAILABLE:
         return orders.filter(order => {
-          if (order.type === orderTypes.AVAILABLE) {
+          if (order.type === orderCategories.AVAILABLE) {
             return true
           }
           return false
         })
-      case orderTypes.COMPLETED:
+      case orderCategories.COMPLETED:
         return orders.filter(order => {
-          if (order.type === orderTypes.COMPLETED) {
+          if (order.type === orderCategories.COMPLETED) {
             return true
           }
           return false
         })
-      case orderTypes.REFUND:
+      case orderCategories.REFUND:
         return orders.filter(order => {
-          if (order.type === orderTypes.REFUND) {
+          if (order.type === orderCategories.REFUND) {
             return true
           }
           return false
@@ -301,9 +303,9 @@ export const ordersSelector = (state) => {
         return null
     }
   }
-}
-
+)
 
 export const currentOrderSelector = (state) => {
   return state.userCentre.currentOrder
 }
+

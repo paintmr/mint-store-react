@@ -6,7 +6,7 @@ export const entityOrders = {
   id: 'id'
 }
 
-export const orderTypes = {
+export const orderCategories = {
   ALL: 0,
   AVAILABLE: 1,
   COMPLETED: 2,
@@ -51,4 +51,8 @@ export default orderReducer
 // selectors
 export const getOrderById = (state, id) => {
   return state.entities.orders[id]
+}
+
+export const getAllOrdersSelector = (state) => {
+  return state.entities.orders
 }
