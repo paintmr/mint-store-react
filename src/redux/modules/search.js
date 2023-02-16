@@ -290,14 +290,12 @@ export const historyKeywordsSelector = (state) => {
 }
 
 export const relatedKeywordsSelector = (state) => {
-  const text = state.search.inputText
+  const text = inputTextSelector(state)
   const keywordrelatedInfo = state.search.relatedKeywords[text]
-  if (keywordrelatedInfo) {
-    if (keywordrelatedInfo.ids) {
-      return keywordrelatedInfo.ids.map(id => {
-        return getKeywordById(state, id)
-      })
-    }
+  if (keywordrelatedInfo && keywordrelatedInfo.ids) {
+    return keywordrelatedInfo.ids.map(id => {
+      return getKeywordById(state, id)
+    })
   }
   return null
 }

@@ -23,7 +23,6 @@ export const getProductByIdSelector = (state, id) => {
 export const getProductWithDetailsByIdSelector = (state, id) => {
   const product = state.entities.products[id]
   if (product && product.detail && product.purchaseNotes) {
-
     return product
   } else {
     return null

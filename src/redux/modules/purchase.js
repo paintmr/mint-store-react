@@ -1,5 +1,5 @@
 import { getProductWithDetailsByIdSelector } from "./entities/products"
-import { loginMobileSelector } from "./login"
+import { userNameSelector } from "./login"
 import { nanoid } from "nanoid"
 
 const initialState = {
@@ -42,7 +42,8 @@ export const submitOrder = (productId) => {
         const product = productSelector(getState(), productId)
         const { quantity } = getState().purchase
         const { currentPrice } = product
-        const text1 = `${quantity} coupons | price: $${currentPrice * quantity}`
+        const totalPrice = (currentPrice * quantity).toFixed(2)
+        const text1 = `${quantity} coupons | price: $${totalPrice}`
         const text2 = `valid untill December 26`
 
         const newOrder = {
@@ -110,5 +111,5 @@ export const productSelector = (state, productId) => {
 }
 
 export const getLoginMobileSelector = (state) => {
-  return loginMobileSelector(state)
+  return userNameSelector(state)
 }

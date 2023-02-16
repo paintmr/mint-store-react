@@ -108,7 +108,3 @@ export const passwordSelector = (state) => {
 export const loginStatusSelector = (state) => {
   return state.login.loginStatus
 }
-
-export const loginMobileSelector = (state) => {
-  return state.login.userName
-}

@@ -1,24 +1,16 @@
 const initialState = {
-  error: '',
-  successMessage: ''
+  popUpMessage: '',
 }
 
 // action types
 const types = {
-  CLEAR_ERROR: 'CLEAR_ERROR',
-  CLEAR_SUCCESS_MESSAGE: 'CLEAR_SUCCESS_MESSAGE'
+  CLEAR_POP_UP_MESSAGE: 'CLEAR_POP_UP_MESSAGE'
 }
 
 // action creators
-export const clearError = () => {
+export const clearPopUpMessage = () => {
   return {
-    type: types.CLEAR_ERROR
-  }
-}
-
-export const clearSuccessMessage = () => {
-  return {
-    type: types.CLEAR_SUCCESS_MESSAGE
+    type: types.CLEAR_POP_UP_MESSAGE
   }
 }
 
@@ -27,25 +19,17 @@ const appReducer = (state = initialState, action) => {
   if (action.error) {
     return {
       ...state,
-      error: action.error
+      popUpMessage: action.error
     }
-  }
-  else if (action.type === types.CLEAR_ERROR) {
+  } else if (action.successMessage) {
     return {
       ...state,
-      error: ''
+      popUpMessage: action.successMessage
     }
-  }
-  else if (action.successMessage) {
+  } else if (action.type === types.CLEAR_POP_UP_MESSAGE) {
     return {
       ...state,
-      successMessage: action.successMessage
-    }
-  }
-  else if (action.type === types.CLEAR_SUCCESS_MESSAGE) {
-    return {
-      ...state,
-      successMessage: ''
+      popUpMessage: ''
     }
   }
   return state
@@ -53,9 +37,6 @@ const appReducer = (state = initialState, action) => {
 export default appReducer
 
 // selectors
-export const errorSelector = state => {
-  return state.app.error
-}
-export const successMessageSelector = state => {
-  return state.app.successMessage
+export const popUpMessageSelector = state => {
+  return state.app.popUpMessage
 }

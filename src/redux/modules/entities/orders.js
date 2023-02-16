@@ -19,29 +19,31 @@ const orderReducer = (state = {}, action) => {
       ...state,
       ...action.fetchedData.orders
     }
-  } else if (action.type === types.DELETE_ORDER_CONFIRM) {
-    // If the use has confirmed to delete an order, delete the order.
-    const { [action.orderId]: orderTobeDeleted, ...restOrders } = state
-    return restOrders
-  } else if (action.type === types.COMMENT_ORDER_SUMBIT) {
-    // If the user has added a comment, add the comment ID to its corresponding order 
-    const { newCommentObj, orderId } = action
-    const order = state[orderId]
-    order.commentId = newCommentObj.commentId
-    return {
-      ...state,
-      [orderId]: order
-    }
-  } else if (action.type === purchaseTypes.SUBMIT_ORDER_SUCCESS) {
-    const { newOrder } = action
-    const { id } = newOrder
-    return {
-      ...state,
-      [id]: newOrder
-    }
   }
-
-  return state
+  switch (action.type) {
+    case types.DELETE_ORDER_CONFIRM:
+      // If the use has confirmed to delete an order, delete the order.
+      const { [action.orderId]: orderTobeDeleted, ...restOrders } = state
+      return restOrders
+    case types.COMMENT_ORDER_SUMBIT:
+      // If the user has added a comment, add the comment ID to its corresponding order 
+      const { newCommentObj, orderId } = action
+      const order = state[orderId]
+      order.commentId = newCommentObj.commentId
+      return {
+        ...state,
+        [orderId]: order
+      }
+    case purchaseTypes.SUBMIT_ORDER_SUCCESS:
+      const { newOrder } = action
+      const { id } = newOrder
+      return {
+        ...state,
+        [id]: newOrder
+      }
+    default:
+      return state
+  }
 }
 
 export default orderReducer

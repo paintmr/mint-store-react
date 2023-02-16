@@ -8,16 +8,13 @@ import {
 } from "../../../../redux/modules/usercentre";
 
 import Confirm from "../../../../components/Confirm";
-import MessageToast from "../../../../components/MessageToast"
-import { successMessageSelector, clearSuccessMessage } from "../../../../redux/modules/app";
-
 
 const tabTitles = ["All", "Available", "Completed", "Refund"];
 
 class UserMain extends Component {
 
   render() {
-    const { tabIndex, orders, cancelDeleteOrder, confirmDeleteOrder, currentOrder, cancelChangeCommentingOrder, successMessage, clearSuccessMessage } = this.props;
+    const { tabIndex, orders, cancelDeleteOrder, confirmDeleteOrder, currentOrder, cancelChangeCommentingOrder } = this.props;
 
     return (
       <div className="userMain">
@@ -45,7 +42,6 @@ class UserMain extends Component {
         </div>
         {currentOrder.isDeleting ? <Confirm content='Delete the order?' cancelText='Cancel' confirmText='Confirm' onCancel={cancelDeleteOrder} onConfirm={confirmDeleteOrder} /> : null}
         {currentOrder.changeCommentingOrder ? <Confirm content='Your comment has not been saved. Change commenting order?' cancelText='Cancel' confirmText='Confirm' onCancel={cancelChangeCommentingOrder} onConfirm={this.confirmChangeCommentingOrder} /> : null}
-        {successMessage ? <MessageToast successMessage={successMessage} clearSuccessMessage={clearSuccessMessage} /> : null}
       </div>
     );
   }
@@ -94,7 +90,6 @@ class UserMain extends Component {
 const mapStateToProps = (state) => {
   return {
     currentOrder: currentOrderSelector(state),
-    successMessage: successMessageSelector(state)
   }
 }
 
@@ -111,7 +106,6 @@ const mapDispatchToProps = (dispatch) => {
     changeCommentingOrderRequest: (nextId) => { dispatch(changeCommentingOrderRequest(nextId)) },
     cancelChangeCommentingOrder: () => { dispatch(cancelChangeCommentingOrder()) },
     confirmChangeCommentingOrder: (nextId) => { dispatch(confirmChangeCommentingOrder(nextId)) },
-    clearSuccessMessage: () => { dispatch(clearSuccessMessage()) }
   }
 }
 

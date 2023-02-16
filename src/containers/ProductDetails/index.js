@@ -13,13 +13,21 @@ class ProductDetails extends Component {
 
   componentDidMount() {
     const { productDetails, productDetailsRequest, shop, shopDetailsRequest } = this.props
-    if (!productDetails) {
-      const { id } = this.props.match.params
-      productDetailsRequest(id)
-    } else if (!shop) {
+
+    // 不能按照视频里教的这样写。假设目前详情页展示的是Product1，然后退出到首页，点击product2进入详情页，此时redux中仍然有Product1的详情，如果按照下面的代码写，页面不会去请求Product2的详情，而仍旧展示Product1的详情
+    // if (!productDetails) {
+    //   const { id } = this.props.match.params
+    //   productDetailsRequest(id)
+    // } else if (!shop) {
+    //   shopDetailsRequest()
+    // }
+
+
+    const { id } = this.props.match.params
+    productDetailsRequest(id)
+    if (productDetails && !shop) {
       shopDetailsRequest()
     }
-
   }
 
   componentDidUpdate(preProps) {

@@ -5,12 +5,8 @@ export default class MessageToast extends Component {
 
   componentDidMount() {
     this.timer = setInterval(() => {
-      const { clearError, clearSuccessMessage } = this.props
-      if (clearError) {
-        clearError()
-      } else if (clearSuccessMessage) {
-        clearSuccessMessage()
-      }
+      const { clearPopUpMessage } = this.props
+      clearPopUpMessage()
     }, 2000)
   }
 
@@ -21,16 +17,11 @@ export default class MessageToast extends Component {
   }
 
   render() {
-    const { error, successMessage } = this.props
+    const { popUpMessage } = this.props
     return (
       <div className="messageToast">
         <div className="messageToast__text">
-          {
-            error ?
-              error :
-              successMessage ?
-                successMessage :
-                null}
+          {popUpMessage}
         </div>
       </div>
     );

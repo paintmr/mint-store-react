@@ -53,7 +53,7 @@ export default store => next => action => {
     (error) => {
       next(newAction({
         type: failureType,
-        error: error.message || '获取数据失败'
+        error: error.message || 'Data fetching failed'
       }))
     }
   )
