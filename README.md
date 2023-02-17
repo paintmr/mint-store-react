@@ -1,4 +1,4 @@
-# Welcome to mint-store-react16
+# Welcome to Mint-Store-React16
 
 ## React Version
 
@@ -127,3 +127,11 @@ When the user clicks the word 'my orders', she is directed to the UserCenter pag
 Use Reselect to prevent some unnecessary selector execution.
 
 Reselect is applied to ordersSelector in src/redux/modules/usercentre.js
+
+## Dynamic imports and route-centric code splitting
+
+In the folder src/utils, a Component file called AsyncComponent.js is created. AsyncComponent.js contains a function named asyncComponent, and it returns a Component if it is executed. The function asyncComponent receives the dynamically importing Component process as a parameter.
+
+In src/App.js, instead of importing Components directly, dynamically import each Component and pass this dynamically importing process as a parameter to the function asyncComponent.
+
+In this way, each Component is imported dynamically based on routes, making the app more efficient.

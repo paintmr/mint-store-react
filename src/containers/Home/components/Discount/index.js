@@ -7,7 +7,7 @@ export default class Discount extends Component {
   render() {
     return (
       <div className='discount'>
-        <a className="discount__header">
+        <a className="discount__header" href="/index.html" onClick={(e) => e.preventDefault()}>
           <span className="discount__title">Special discounts</span>
           <span className="discount__more">More discounts</span>
           <span className="discount__arrow" />

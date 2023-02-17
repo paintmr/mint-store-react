@@ -60,7 +60,7 @@ class PurchaseForm extends Component {
             <span className="purchaseForm__to__usercentre__text">My Orders</span>
           </Link>
         </ul>
-        <a className="purchaseForm__submit" onClick={this.handleClick}>
+        <a className="purchaseForm__submit" onClick={this.handleClick} href="/index.html">
           Submit Order
         </a>
       </div>
@@ -84,9 +84,11 @@ class PurchaseForm extends Component {
     this.props.setQuantity(quantity)
   };
 
-  handleClick = () => {
-    this.props.submitOrder(this.props.product.id)
-  };
+  handleClick = (e) => {
+    const { product: { id } } = this.props
+    this.props.submitOrder(id)
+    e.preventDefault()
+  }
 }
 
 export default PurchaseForm;

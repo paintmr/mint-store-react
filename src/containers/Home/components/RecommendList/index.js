@@ -30,6 +30,9 @@ export default class RecommendedList extends Component {
   componentWillUnmount() {
     if (!this.state.listenerRemoved) {
       document.removeEventListener("scroll", this.handleScroll)
+      // Set scrollTop to 0. Otherwise, when entering the Product Details page, the scrollTop will not be 0 and keep the scrollTop number of the Home page.
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     }
   }
 
@@ -48,7 +51,7 @@ export default class RecommendedList extends Component {
           this.props.rmdPageCount < 3 ? (
             <Loading />
           ) : (
-            <a className="recommendedList__viewAll">
+            <a className="recommendedList__viewAll" href="/index.html" onClick={(e) => e.preventDefault()}>
               More products...
             </a>
           )

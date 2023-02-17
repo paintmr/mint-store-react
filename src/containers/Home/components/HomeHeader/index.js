@@ -6,7 +6,7 @@ export default class HomeHeader extends Component {
     return (
       <div className="homeHeader">
         <header className="homeHeader__wrapper">
-          <a className="homeHeader__city">HK</a>
+          <a className="homeHeader__city" href="/index.html" onClick={(e) => e.preventDefault()}>HK</a>
           <Link to="/search" className="homeHeader__search">Enter a shop or place</Link>
           <Link to="/usercentre" className="homeHeader__self">
             <div className="homeHeader__portrait" />

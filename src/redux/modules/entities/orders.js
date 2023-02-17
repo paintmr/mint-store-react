@@ -38,8 +38,8 @@ const orderReducer = (state = {}, action) => {
       const { newOrder } = action
       const { id } = newOrder
       return {
-        ...state,
-        [id]: newOrder
+        [id]: newOrder,
+        ...state
       }
     default:
       return state
