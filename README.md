@@ -38,11 +38,11 @@ The dataFetching.js file detects if the action contains the key 'FETCH_DATA' whi
 
 ## Home page
 
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home2.png?raw=true)
+
 On the Home page, when it is mounted, it displays product data in the discount list and recommended list.
 
 When the user scrolls the screen, she can get more of the recommended list until she gets the end of the list.
-
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home2.png?raw=true)
 
 ## Product Details page
 
@@ -70,18 +70,19 @@ The user may clear all search results by clicking the "Clear History" button.
 
 ## Search Results page
 
-On the search results page, she user sees shops related to the keyword she has just clicked.
-
 ![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/4%20Search%20Results.png?raw=true)
 
+On the search results page, she user sees shops related to the keyword she has just clicked.
+
 ## Login page
+
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/5%20Login.png?raw=true)
 
 When the user clickes the human figure icon on the top right of the Home page, she is either directed to the UserCentre page if she has logged in or redirected to the Login page if she has not logged in.
 
 Building a PrivateRoute component can make this happen.
 
 When the user has inputed a random number and a password, she can login. And the number and login status are stored by localStorage.
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/5%20Login.png?raw=true)
 
 ## UserCentre page
 
