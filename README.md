@@ -1,4 +1,6 @@
-# Welcome to Mint-Store-React16
+# Welcome to Mint-Store-React
+
+To use the app, please go to https://mintstore.intellibytesolutions.com/
 
 ## App Structure
 
