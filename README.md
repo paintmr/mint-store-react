@@ -10,7 +10,7 @@
 
 "react-router-dom": "4.3.1",
 
-"react-scripts": "1.1.4",
+"react-scripts": "2.1.5",
 
 "react-slick": "^0.29.0",
 

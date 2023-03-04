@@ -6,59 +6,59 @@ export default class Footer extends Component {
     return (
       <footer className='footer'>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          我的
+          My
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          社区论坛
+          Forum
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          添加商户
+          Add businesses
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          意见反馈
+          Feedback
         </a>
         <br />
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          美团网
+          Mint web
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          美团下载
+          Mint web download
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          结婚
+          Wedding
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          亲子
+          Parenting
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          家装
+          Decoration
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          宴会
+          Feasts
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          教育
+          Education
         </a>
         <br />
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          电脑版
+          Desktop
         </a>
         <em className="footer__seperator">|</em>
         <a className='footer__link' href="https://m.dianping.com/nmy/myinfo">
-          客户端
+          Mobile
         </a>
         <em className="footer__seperator">|</em>
         <br />
-        <p className="footer__copyright">copyright ©2023 dianping.com</p>
+        <p className="footer__copyright">copyright ©2023 mintstore.com</p>
       </footer>
     )
   }
