@@ -1,25 +1,5 @@
 # Welcome to Mint-Store-React16
 
-## React Version
-
-"react": "16.14.0",
-
-"react-dom": "16.14.0",
-
-"react-redux": "5.0.7",
-
-"react-router-dom": "4.3.1",
-
-"react-scripts": "2.1.5",
-
-"react-slick": "^0.29.0",
-
-"redux": "4.0.0",
-
-"redux-thunk": "2.3.0",
-
-"web-vitals": "^2.1.0"
-
 ## App Structure
 
 The app ui part consists of the following pages:
@@ -36,9 +16,11 @@ The Redux in this project has a `'duck' structure`. In each Redux file, there ar
 
 The redux file consists of the following folders and file: middleware, modules, and store.js
 
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/redux%20structure.png?raw=true)
+
 ### Modules
 
-The module file consists of two types of files: the `files to store different types of data` (e.g. products.js, and comments.js in the entities folder), and the `files  for each page` (e.g. HomePage, ProductDetailPage, LoginPage).
+The module file consists of two types of files: the `files to store different types of data` (e.g. products.js, and comments.js in the entities folder), and the `files for each page` (e.g. HomePage, ProductDetailPage, LoginPage).
 
 Take redux/modules/home.js and redux/modules/entities/products.js for example.
 
@@ -58,25 +40,36 @@ On the Home page, when it is mounted, it displays product data in the discount l
 
 When the user scrolls the screen, she can get more of the recommended list until she gets the end of the list.
 
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home2.png?raw=true)
+
 ## Product Details page
 
-Every time the user click a product, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/2%20Product%20Details.png?raw=true)
+Every time the user click a product in the discount list and recommended list, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
 
 To make this works, redux provides not only product details but also shops related to the product.
 
-When the user clicks the two "Buy Now" buttons, she is directed to the Purchase page.
+When a user who has logged in clicks the two "Buy Now" buttons, she is directed to the Purchase page.
+
+When a user who has not logged in clicks the two "Buy Now" buttons, she is redirected to the Login page.
 
 ## Search page
+
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/3%20Search.png?raw=true)
 
 When the user clicks the search bar at the top of the Home page, she is directed to the Search page.
 
 When she inputs something into the input box, a related search keyword list occurs for her reference. When she clickes the little corss icon at the end of the input box, she clears her input and the related keyword list disappears. When she clicks the cancel button, she goes back to the Home page.
 
-When she clicks the keyword either in the related search keyword list or the popular search keyword list, they keyword is added to the search history list, and she is directed to the search result page.
+When she clicks the keyword either in the related search keyword list or the popular search keyword list, the keyword is added to the search history list, and she is directed to the search result page.
+
+The user may clear all search results by clicking the "Clear History" button.
 
 ## Search Results page
 
 On the search results page, she user sees shops related to the keyword she has just clicked.
+
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/4%20Search%20Results.png?raw=true)
 
 ## Login page
 
@@ -85,8 +78,11 @@ When the user clickes the human figure icon on the top right of the Home page, s
 Building a PrivateRoute component can make this happen.
 
 When the user has inputed a random number and a password, she can login. And the number and login status are stored by localStorage.
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/5%20Login.png?raw=true)
 
 ## UserCentre page
+
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/6%20User%20Centre.png?raw=true)
 
 ### Display Orders
 
@@ -115,6 +111,8 @@ The newly added comment object is stored in redux/modules/entities/comments.
 When the comment has been stored, a success message pops out.
 
 ## Purchase page
+
+![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/7%20Purchase.png?raw=true)
 
 When the user clicks the two buy buttons on the ProductDetails page, she is directed to the Purchase page.
 
