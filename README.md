@@ -47,6 +47,7 @@ When the user scrolls the screen, she can get more of the recommended list until
 ## Product Details page
 
 ![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/2%20Product%20Details.png?raw=true)
+
 Every time the user click a product in the discount list and recommended list, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
 
 To make this works, redux provides not only product details but also shops related to the product.
