@@ -1,4 +1,4 @@
-# Welcome to Mint-Store-React16
+# Welcome to Mint-Store-React
 
 ## App Structure
 
