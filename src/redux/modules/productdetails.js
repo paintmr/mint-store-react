@@ -25,6 +25,8 @@ const types = {
   FETCH_SHOPDETAILS_REQUEST: "FETCH_SHOPDETAILS_REQUEST",
   FETCH_SHOPDETAILS_SUCCESS: "FETCH_SHOPDETAILS_SUCCESS",
   FETCH_SHOPDETAILS_FAILURE: "FETCH_SHOPDETAILS_FAILURE",
+
+  CLEAR_PRODUCTdETAILS_ID: "CLEAR_PRODUCTdETAILS_ID"
 }
 
 // action group creators (acctions processed by redux/middleware/dataFetching.js）
@@ -54,6 +56,10 @@ const fetchShopDetails = (url) => {
       entityInfo: entityShops
     }
   }
+}
+
+export const clearproductDetailsId = () => {
+  return { type: types.CLEAR_PRODUCTdETAILS_ID }
 }
 
 // action creators to dispatch fetch-related actions
@@ -88,6 +94,7 @@ const productDetailsReducer = (state = initialstate.productdetails, action) => {
         id: action.fetchedData.ids[0]
       };
     case types.FETCH_PRODUCTDETAILS_FAILURE:
+    case types.CLEAR_PRODUCTdETAILS_ID:
       return {
         ...state,
         isFetching: false,

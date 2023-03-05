@@ -8,7 +8,7 @@ import BuyButton from './components/BuyButton';
 
 import { connect } from 'react-redux'
 // import actions and selectors
-import { productDetailsRequest, shopDetailsRequest, getProductDetailsSelector, getShopSelector } from '../../redux/modules/productdetails'
+import { productDetailsRequest, shopDetailsRequest, getProductDetailsSelector, getShopSelector, clearproductDetailsId } from '../../redux/modules/productdetails'
 class ProductDetails extends Component {
 
   componentDidMount() {
@@ -34,6 +34,13 @@ class ProductDetails extends Component {
     if (!preProps.productDetails && this.props.productDetails) {
       this.props.shopDetailsRequest()
     }
+  }
+
+  // 退出时清空productDetails, shop的数据，否则下次进入另一个产品详情，会先显示这次的产品详情
+  componentWillUnmount() {
+    this.props.clearproductDetailsId()
+    productDetailsRequest()
+    shopDetailsRequest()
   }
 
   render() {
@@ -70,7 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     productDetailsRequest: (id) => { dispatch(productDetailsRequest(id)) },
-    shopDetailsRequest: () => { dispatch(shopDetailsRequest()) }
+    shopDetailsRequest: () => { dispatch(shopDetailsRequest()) },
+    clearproductDetailsId: () => { dispatch(clearproductDetailsId()) },
 
   }
 }
