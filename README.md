@@ -1,139 +1,134 @@
 # Welcome to Mint-Store-React
 
-To use the app, please go to https://mintstore.intellibytesolutions.com/
+To use the app, please go to https://mintstore.bytepalette.com/
 
-## App Structure
+# App description
 
-The app ui part consists of the following pages:
+This is a React mobile web app. It helps people find the discount coupons from shops like restaurants, hotels, and bars, so people can enjoy their life in a cost-effective way.
 
-- Home 👉 ProductDetails
+# Technologies used
 
-- Search 👉 SearchRedults
+- HTML, CSS, JavaScript
+- React
+- Create React App
+- React-Slick
+- React-Redux
+- Middleware(Redux-Thunk, dataFetching)
+- React-Router, PrivateRoute
+- Reselect
+- Dynamic imports and route-centric code plitting
+- Debug tools(React Developer Tools, Redux DevTools)
+- Git, GitHub
 
-- Login 👉 UserCentre 👉 Purchase
+# Pages
 
-## Redux
+The app consists of the following pages:
 
-The Redux in this project has a `'duck' structure`. In each Redux file, there are actions, reducers, and selectors.
+    Home 👉 ProductDetails
 
-The redux file consists of the following folders and file: middleware, modules, and store.js
+    Search 👉 SearchRedults
 
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/redux%20structure.png?raw=true)
+    Login 👉 Purchase 👉 UserCentre
 
-### Modules
+# Home page
 
-The module file consists of two types of files: the `files to store different types of data` (e.g. products.js, and comments.js in the entities folder), and the `files for each page` (e.g. HomePage, ProductDetailPage, LoginPage).
-
-Take redux/modules/home.js and redux/modules/entities/products.js for example.
-
-The home.js file contains all the actions, reducers, and selectors for the HomePage. Once the HomePage is mounted, home.js dispatches request actions to fetch product list data. The actions are processed by reducers in both home.js and products.js. The state in home.js keeps product id arrays for different sections of the HomePage, while the state in products.js keeps all product data. Then the selectors in home.js get all product data from products.js based on the id arrays home.js keeps.
-
-### Middleware
-
-The dataFetching.js file in the Middleware folder is used to dispatch data-fetching actions (request-sent, request-success, request-failure).
-
-All data-request is sent by this middleware, which prevents redundant code.
-
-The dataFetching.js file detects if the action contains the key 'FETCH_DATA' which contains a string array containing requestType, successType, and failureType. If the key 'FETCH_DATA' exists, the dataFetching.js file will dispatch these three request types. Otherwise, it will pass the action to the next reducer/middleware.
-
-## Home page
-
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/1%20Home2.png?raw=true)
-
-On the Home page, when it is mounted, it displays product data in the discount list and recommended list.
+On the Home page, when it is mounted, it displays product data in components like the discount list and recommended list.
 
 When the user scrolls the screen, she can get more of the recommended list until she gets the end of the list.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-home1.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-home2.png?raw=true)
 
-## Product Details page
+# Product Details page
 
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/2%20Product%20Details.png?raw=true)
+Every time the user click a product in the discount list or the recommended list, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
 
-Every time the user click a product in the discount list and recommended list, she is directed to the detail page of that product, which shows not only product details but also shops related to the product.
+To make this works, Redux provides not only product details but also shops related to the product.
 
-To make this works, redux provides not only product details but also shops related to the product.
+When a user who has logged in clicks one of the two "Buy Now" buttons, she is directed to the Purchase page.
 
-When a user who has logged in clicks the two "Buy Now" buttons, she is directed to the Purchase page.
+When a user who has **_not_** logged in clicks one of the two "Buy Now" buttons, she is redirected to the Login page.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-product-details1.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-product-details2.png?raw=true)
 
-When a user who has not logged in clicks the two "Buy Now" buttons, she is redirected to the Login page.
-
-## Search page
-
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/3%20Search.png?raw=true)
+# Search page
 
 When the user clicks the search bar at the top of the Home page, she is directed to the Search page.
 
-When she inputs something into the input box, a related search keyword list occurs for her reference. When she clickes the little corss icon at the end of the input box, she clears her input and the related keyword list disappears. When she clicks the cancel button, she goes back to the Home page.
+When she enters something into the input box, a related search keyword list occurs for her reference.
+
+When she clickes the little corss icon at the end of the input box, she clears her input and the related keyword list disappears.
+
+When she clicks the cancel button, she goes back to the Home page.
 
 When she clicks the keyword either in the related search keyword list or the popular search keyword list, the keyword is added to the search history list, and she is directed to the search result page.
 
 The user may clear all search results by clicking the "Clear History" button.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-search1.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-search2.png?raw=true)
 
-## Search Results page
+# Search Results page
 
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/4%20Search%20Results.png?raw=true)
+On the search results page, the user sees shops related to the keyword she has just clicked.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-search-results.png?raw=true)
 
-On the search results page, she user sees shops related to the keyword she has just clicked.
+# Login page
 
-## Login page
-
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/5%20Login.png?raw=true)
-
-When the user clickes the human figure icon on the top right of the Home page, she is either directed to the UserCentre page if she has logged in or redirected to the Login page if she has not logged in.
+When the user clickes the account icon at the top-right corner of the Home page, she is either directed to the UserCentre page if she has logged in or redirected to the Login page if she has not logged in.
 
 Building a PrivateRoute component can make this happen.
 
 When the user has inputed a random number and a password, she can login. And the number and login status are stored by localStorage.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-login.png?raw=true)
 
-## UserCentre page
+# Purchase page
 
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/6%20User%20Centre.png?raw=true)
-
-### Display Orders
-
-When the user is on the UserCentre page, she can click the home button on the top left to go back to the Home page and the logout button to log out.
-
-When the use clicks tabs like "All", "Available", "Completed", and "Refund", she can see differnt order list.
-
-### Delete Orders
-
-To handle deletion and comments conveniently, change UserMain from a UI Component to a Container
-
-When the user clicks the delete button, she can delete the order.
-
-### Comment Orders
-
-Only completed orders which have not been commented have a comment button.
-
-The user can click the comment button and then see a textarea to write comments. Shen can also click the star bars to give star ranking.
-
-If she has written something in the comment textarea or clicked the ranking stars of an order, and then she clicks the comment button of another order, a warming dialog pops up to tell her that her comment has not been saved.
-
-The id of the newly added comment is stored with the related order in redux/modules/entities/orders.
-
-The newly added comment object is stored in redux/modules/entities/comments.
-
-When the comment has been stored, a success message pops out.
-
-## Purchase page
-
-![enter image description here](https://github.com/paintmr/mint-store-react16/blob/main/App%20UI%20mockups/7%20Purchase.png?raw=true)
-
-When the user clicks the two buy buttons on the ProductDetails page, she is directed to the Purchase page.
+When the user clicks one of the two "Buy" buttons on the ProductDetails page, she is directed to the Purchase page.
 
 When the user has placed orders, a dialog pops out to show the success.
 
-When the user clicks the word 'my orders', she is directed to the UserCenter page to vew her orders including the newly-added ones.
+When the user clicks the word 'my orders', she is directed to the UserCenter page to view her orders.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-purchase.png?raw=true)
 
-## Reselect
+# UserCentre page
 
-Use Reselect to prevent some unnecessary selector execution.
+The user can see different order list when she clicks the tabs: All, Available, Completed, Refund.
 
-Reselect is applied to ordersSelector in src/redux/modules/usercentre.js
+The user can delete any order by clicking the "Delete" button.
 
-## Dynamic imports and route-centric code splitting
+The user can comment an order by clicking the "Comment" button.
 
-In the folder src/utils, a Component file called AsyncComponent.js is created. AsyncComponent.js contains a function named asyncComponent, and it returns a Component if it is executed. The function asyncComponent receives the dynamically importing Component process as a parameter.
+Only completed orders which have not been commented have a "Comment" button.
 
-In src/App.js, instead of importing Components directly, dynamically import each Component and pass this dynamically importing process as a parameter to the function asyncComponent.
+Every time the user has deleted or commented an order, a dialog pops up to let her know the result.
 
-In this way, each Component is imported dynamically based on routes, making the app more efficient.
+The user can click the home button on the top-left corner to go back to the Home page and the logout button on the top-right corner to log out.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-user-centre.png?raw=true)
+
+# Redux folder structure
+
+The Redux folder consists of the middleware folder, the modules folder, and store.js.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-redux.png?raw=true)
+The dataFetching middleware is used to process data fetching actions.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-middleware-data-fetching.png?raw=true)
+
+# React-Slick
+
+React-Slick is a popular and customizable carousel/slider library for React applications.
+
+On the Home page, the category area and the promotion area (marked with the blue boxes in the picture) are made with the help of React-Slick.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-react-slick.png?raw=true)
+
+# Private Route
+
+The Private Route makes sure that only users who have logged in can visit the Purchase page and the User Centre page.
+
+# Reslect
+
+ordersSelector gets the order data displayed on the User Centre page.
+
+As long as the two input selectors (tabIndexSelector and getAllOrdersSelector) don't change, ordersSelector would not make any recomputation, which improves the app performance.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-reselect.png?raw=true)
+
+# Dynamic imports and route-centric code splitting
+
+All pages are dynamically imported and the code is split based on routes.
+
+The function asyncComponent() makes this happen. It takes the dynamic importing function as its argument and returns a React class component once the component is loaded.
+![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-dynamic-imports1.png?raw=true)![enter image description here](https://github.com/paintmr/mint-store-react/blob/main/App%20UI%20mockups/readMe%20description%20pictures/development-portfolio-mint-store-dynamic-imports2.png?raw=true)
